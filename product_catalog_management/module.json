@@ -1,0 +1,8 @@
+{
+  "id": "product_catalog_management",
+  "title": "Product Catalog Management",
+  "app_id": "ecommerce_operations_platform",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

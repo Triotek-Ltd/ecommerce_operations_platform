@@ -1,0 +1,7 @@
+{
+  "docs": [
+    "order_line",
+    "order_record",
+    "order_status_event"
+  ]
+}

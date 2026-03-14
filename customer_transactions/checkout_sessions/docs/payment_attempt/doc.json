@@ -1,0 +1,27 @@
+{
+  "doc_key": "payment_attempt",
+  "doc_title": "Payment Attempt",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "customer_transactions",
+  "submodule_id": "checkout_sessions",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "customer_transactions",
+    "submodule": "checkout_sessions",
+    "reference_doc_id": "payment_attempt",
+    "evidence_gaps": [
+      "retry model",
+      "idempotency behavior"
+    ]
+  }
+}

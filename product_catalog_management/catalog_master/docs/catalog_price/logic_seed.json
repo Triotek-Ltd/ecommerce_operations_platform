@@ -1,0 +1,116 @@
+{
+  "doc_id": "catalog_price",
+  "doc_title": "Catalog Price",
+  "archetype": "transaction",
+  "doc_kind": "transaction",
+  "actions": [
+    "create",
+    "review",
+    "approve",
+    "activate",
+    "supersede",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "approved",
+      "effective",
+      "superseded",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 3,
+  "fetch_rule_count": 0,
+  "action_handler_count": 6,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "transaction_flow",
+      "supports_submission": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "draft",
+      "approved",
+      "effective",
+      "superseded",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "transaction_date": "transaction_date",
+      "party": "primary_party",
+      "currency": "currency_code",
+      "total_amount": "total_amount",
+      "effective_date": "schedule_marker",
+      "price_status": "status_flag"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "price_code",
+      "source_product_catalog_product",
+      "price_type"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "transaction_date",
+      "party",
+      "total_amount",
+      "workflow_state"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "approved",
+      "effective",
+      "superseded",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "review": null,
+      "approve": "approved",
+      "activate": null,
+      "supersede": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {},
+  "related_docs": [
+    "catalog_product",
+    "pricing_decision",
+    "catalog_change_log"
+  ],
+  "borrowed_fields": [
+    "source pricing context from pricing_decision",
+    "product identity from catalog_product"
+  ]
+}

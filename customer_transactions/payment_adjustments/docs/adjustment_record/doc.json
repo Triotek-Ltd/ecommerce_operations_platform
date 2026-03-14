@@ -1,0 +1,27 @@
+{
+  "doc_key": "adjustment_record",
+  "doc_title": "Adjustment Record",
+  "doc_kind": "ledger",
+  "status": "draft",
+  "module_id": "customer_transactions",
+  "submodule_id": "payment_adjustments",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "ledger",
+  "classification": {
+    "archetype": "ledger",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "customer_transactions",
+    "submodule": "payment_adjustments",
+    "reference_doc_id": "adjustment_record",
+    "evidence_gaps": [
+      "fee/tax adjustment handling",
+      "financial-impact rules"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "doc_key": "refund_case",
+  "doc_title": "Refund Case",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "customer_transactions",
+  "submodule_id": "payment_adjustments",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "customer_transactions",
+    "submodule": "payment_adjustments",
+    "reference_doc_id": "refund_case",
+    "evidence_gaps": [
+      "refund-source hierarchy",
+      "partial refund model"
+    ]
+  }
+}

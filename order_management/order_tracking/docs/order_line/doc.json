@@ -1,0 +1,27 @@
+{
+  "doc_key": "order_line",
+  "doc_title": "Order Line",
+  "doc_kind": "ledger",
+  "status": "draft",
+  "module_id": "order_management",
+  "submodule_id": "order_tracking",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "ledger",
+  "classification": {
+    "archetype": "ledger",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "order_management",
+    "submodule": "order_tracking",
+    "reference_doc_id": "order_line",
+    "evidence_gaps": [
+      "return-partial-line handling",
+      "pricing snapshot rules"
+    ]
+  }
+}

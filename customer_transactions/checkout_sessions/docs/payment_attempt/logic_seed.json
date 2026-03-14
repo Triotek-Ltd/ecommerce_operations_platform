@@ -1,0 +1,120 @@
+{
+  "doc_id": "payment_attempt",
+  "doc_title": "Payment Attempt",
+  "archetype": "transaction",
+  "doc_kind": "transaction",
+  "actions": [
+    "create",
+    "authorize",
+    "confirm",
+    "fail",
+    "cancel",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "initiated",
+    "states": [
+      "initiated",
+      "processing",
+      "succeeded",
+      "failed",
+      "cancelled",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 5,
+  "fetch_rule_count": 0,
+  "action_handler_count": 6,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "transaction_flow",
+      "supports_submission": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "initiated",
+      "processing",
+      "succeeded",
+      "failed",
+      "cancelled",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "transaction_date": "transaction_date",
+      "party": "primary_party",
+      "currency": "currency_code",
+      "total_amount": "total_amount",
+      "payment_status": "status_flag"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "attempt_code",
+      "checkout_order_reference",
+      "payment_method"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "transaction_date",
+      "party",
+      "total_amount",
+      "workflow_state"
+    ],
+    "initial_state": "initiated",
+    "lifecycle_states": [
+      "initiated",
+      "processing",
+      "succeeded",
+      "failed",
+      "cancelled",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "authorize": null,
+      "confirm": null,
+      "fail": null,
+      "cancel": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {},
+  "related_docs": [
+    "checkout_session",
+    "order_record",
+    "payment_intent_record",
+    "card_authorization_record",
+    "mobile_money_transaction"
+  ],
+  "borrowed_fields": [
+    "checkout/order context from linked records",
+    "external payment references from payment integration docs"
+  ]
+}

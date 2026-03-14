@@ -1,0 +1,8 @@
+{
+  "id": "order_management",
+  "title": "Order Management",
+  "app_id": "ecommerce_operations_platform",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

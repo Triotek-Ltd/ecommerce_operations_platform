@@ -1,0 +1,97 @@
+{
+  "doc_id": "commerce_customer_account",
+  "doc_title": "Commerce Customer Account",
+  "archetype": "master",
+  "doc_kind": "master",
+  "actions": [
+    "create",
+    "update",
+    "suspend",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "active",
+    "states": [
+      "active",
+      "suspended",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 4,
+  "fetch_rule_count": 0,
+  "action_handler_count": 4,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "entity_lifecycle",
+      "case_management": false
+    },
+    "reporting_profile": {
+      "supports_snapshots": false,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "active",
+      "suspended",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "account_status": "status_flag"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "account_code",
+      "source_customer_reference",
+      "account_status"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "active",
+    "lifecycle_states": [
+      "active",
+      "suspended",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "update": null,
+      "suspend": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {},
+  "related_docs": [
+    "account_activity_log",
+    "wishlist_record",
+    "purchase_history_snapshot",
+    "customer_account"
+  ],
+  "borrowed_fields": [
+    "base customer identity from sales/CRM customer_account"
+  ]
+}

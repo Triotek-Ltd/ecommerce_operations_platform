@@ -1,0 +1,8 @@
+{
+  "id": "fulfillment_control",
+  "title": "Fulfillment Control",
+  "app_id": "ecommerce_operations_platform",
+  "module_id": "order_management",
+  "type": "submodule",
+  "status": "draft"
+}

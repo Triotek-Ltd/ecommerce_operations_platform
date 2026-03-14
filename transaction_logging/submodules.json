@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "commerce_event_stream",
+    "sales_activity_views"
+  ]
+}

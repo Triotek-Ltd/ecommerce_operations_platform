@@ -1,0 +1,27 @@
+{
+  "doc_key": "account_activity_log",
+  "doc_title": "Account Activity Log",
+  "doc_kind": "ledger",
+  "status": "draft",
+  "module_id": "customer_accounts",
+  "submodule_id": "account_activity",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "ledger",
+  "classification": {
+    "archetype": "ledger",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "customer_accounts",
+    "submodule": "account_activity",
+    "reference_doc_id": "account_activity_log",
+    "evidence_gaps": [
+      "event taxonomy",
+      "PII minimization rules"
+    ]
+  }
+}

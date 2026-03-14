@@ -1,0 +1,27 @@
+{
+  "doc_key": "wishlist_record",
+  "doc_title": "Wishlist Record",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "customer_accounts",
+  "submodule_id": "account_profiles",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "customer_accounts",
+    "submodule": "account_profiles",
+    "reference_doc_id": "wishlist_record",
+    "evidence_gaps": [
+      "multi-list support",
+      "stale-item handling"
+    ]
+  }
+}

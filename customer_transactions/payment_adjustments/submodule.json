@@ -1,0 +1,8 @@
+{
+  "id": "payment_adjustments",
+  "title": "Payment Adjustments",
+  "app_id": "ecommerce_operations_platform",
+  "module_id": "customer_transactions",
+  "type": "submodule",
+  "status": "draft"
+}

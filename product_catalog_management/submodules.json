@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "catalog_master",
+    "catalog_visibility"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "checkout_sessions",
+  "title": "Checkout Sessions",
+  "app_id": "ecommerce_operations_platform",
+  "module_id": "customer_transactions",
+  "type": "submodule",
+  "status": "draft"
+}

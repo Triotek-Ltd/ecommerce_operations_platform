@@ -1,0 +1,8 @@
+{
+  "id": "customer_accounts",
+  "title": "Customer Accounts",
+  "app_id": "ecommerce_operations_platform",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

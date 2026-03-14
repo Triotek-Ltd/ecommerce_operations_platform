@@ -1,0 +1,7 @@
+{
+  "docs": [
+    "commerce_event_log",
+    "payment_log_entry",
+    "sales_activity_record"
+  ]
+}

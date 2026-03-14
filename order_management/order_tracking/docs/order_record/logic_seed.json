@@ -1,0 +1,125 @@
+{
+  "doc_id": "order_record",
+  "doc_title": "Order Record",
+  "archetype": "transaction",
+  "doc_kind": "transaction",
+  "actions": [
+    "create",
+    "confirm",
+    "update_status",
+    "cancel",
+    "close",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "placed",
+    "states": [
+      "placed",
+      "confirmed",
+      "partially_fulfilled",
+      "fulfilled",
+      "cancelled",
+      "closed",
+      "archived"
+    ],
+    "terminal_states": [
+      "closed",
+      "archived"
+    ]
+  },
+  "related_doc_count": 5,
+  "fetch_rule_count": 0,
+  "action_handler_count": 6,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "transaction_flow",
+      "supports_submission": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "placed",
+      "confirmed",
+      "partially_fulfilled",
+      "fulfilled",
+      "cancelled",
+      "closed",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "transaction_date": "transaction_date",
+      "party": "primary_party",
+      "currency": "currency_code",
+      "total_amount": "total_amount",
+      "order_date": "schedule_marker",
+      "order_status": "status_flag"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "order_code",
+      "source_reference",
+      "external_account_reference"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "transaction_date",
+      "party",
+      "total_amount",
+      "workflow_state"
+    ],
+    "initial_state": "placed",
+    "lifecycle_states": [
+      "placed",
+      "confirmed",
+      "partially_fulfilled",
+      "fulfilled",
+      "cancelled",
+      "closed",
+      "archived"
+    ],
+    "terminal_states": [
+      "closed",
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "confirm": "confirmed",
+      "update_status": null,
+      "cancel": null,
+      "close": "closed",
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {},
+  "related_docs": [
+    "order_line",
+    "order_status_event",
+    "fulfillment_case",
+    "payment_attempt",
+    "shipment_record"
+  ],
+  "borrowed_fields": [
+    "source customer/order context from sales or commerce source docs"
+  ]
+}

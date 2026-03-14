@@ -1,0 +1,9 @@
+{
+  "modules": [
+    "customer_accounts",
+    "customer_transactions",
+    "order_management",
+    "product_catalog_management",
+    "transaction_logging"
+  ]
+}

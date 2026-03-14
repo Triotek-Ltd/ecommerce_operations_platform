@@ -1,0 +1,27 @@
+{
+  "doc_key": "commerce_customer_account",
+  "doc_title": "Commerce Customer Account",
+  "doc_kind": "master",
+  "status": "draft",
+  "module_id": "customer_accounts",
+  "submodule_id": "account_profiles",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "master",
+  "classification": {
+    "archetype": "master",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "customer_accounts",
+    "submodule": "account_profiles",
+    "reference_doc_id": "commerce_customer_account",
+    "evidence_gaps": [
+      "identity unification",
+      "preference-source precedence"
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "doc_id": "catalog_visibility_rule",
+  "doc_title": "Catalog Visibility Rule",
+  "archetype": "configuration",
+  "doc_kind": "configuration",
+  "actions": [
+    "create",
+    "update",
+    "review",
+    "activate",
+    "deactivate",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "active",
+      "inactive",
+      "archived"
+    ],
+    "terminal_states": [
+      "inactive",
+      "archived"
+    ]
+  },
+  "related_doc_count": 2,
+  "fetch_rule_count": 0,
+  "action_handler_count": 6,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "configuration_control",
+      "case_management": false
+    },
+    "reporting_profile": {
+      "supports_snapshots": false,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": true
+    },
+    "lifecycle_states": [
+      "draft",
+      "active",
+      "inactive",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "rule_status": "status_flag"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "rule_code",
+      "linked_product",
+      "visibility_scope"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "active",
+      "inactive",
+      "archived"
+    ],
+    "terminal_states": [
+      "inactive",
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "update": null,
+      "review": null,
+      "activate": "active",
+      "deactivate": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {},
+  "related_docs": [
+    "catalog_product",
+    "catalog_change_log"
+  ],
+  "borrowed_fields": [
+    "catalog identity from catalog_product"
+  ]
+}

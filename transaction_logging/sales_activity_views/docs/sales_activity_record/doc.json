@@ -1,0 +1,27 @@
+{
+  "doc_key": "sales_activity_record",
+  "doc_title": "Sales Activity Record",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "transaction_logging",
+  "submodule_id": "sales_activity_views",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "transaction_logging",
+    "submodule": "sales_activity_views",
+    "reference_doc_id": "sales_activity_record",
+    "evidence_gaps": [
+      "derivation rules",
+      "persistence-vs-regeneration policy"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "docs": [
+    "checkout_session",
+    "payment_attempt"
+  ]
+}

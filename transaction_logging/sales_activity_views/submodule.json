@@ -1,0 +1,8 @@
+{
+  "id": "sales_activity_views",
+  "title": "Sales Activity Views",
+  "app_id": "ecommerce_operations_platform",
+  "module_id": "transaction_logging",
+  "type": "submodule",
+  "status": "draft"
+}

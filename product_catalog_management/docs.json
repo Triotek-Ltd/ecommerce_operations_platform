@@ -1,0 +1,8 @@
+{
+  "docs": [
+    "catalog_price",
+    "catalog_product",
+    "catalog_change_log",
+    "catalog_visibility_rule"
+  ]
+}

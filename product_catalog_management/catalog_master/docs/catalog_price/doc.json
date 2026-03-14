@@ -1,0 +1,27 @@
+{
+  "doc_key": "catalog_price",
+  "doc_title": "Catalog Price",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "product_catalog_management",
+  "submodule_id": "catalog_master",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "product_catalog_management",
+    "submodule": "catalog_master",
+    "reference_doc_id": "catalog_price",
+    "evidence_gaps": [
+      "pricebook/channel override model",
+      "promo stacking rules"
+    ]
+  }
+}

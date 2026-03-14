@@ -1,0 +1,8 @@
+{
+  "id": "account_profiles",
+  "title": "Account Profiles",
+  "app_id": "ecommerce_operations_platform",
+  "module_id": "customer_accounts",
+  "type": "submodule",
+  "status": "draft"
+}

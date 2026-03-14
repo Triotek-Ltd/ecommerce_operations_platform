@@ -1,0 +1,8 @@
+{
+  "id": "catalog_master",
+  "title": "Catalog Master",
+  "app_id": "ecommerce_operations_platform",
+  "module_id": "product_catalog_management",
+  "type": "submodule",
+  "status": "draft"
+}

@@ -1,0 +1,97 @@
+{
+  "doc_id": "adjustment_record",
+  "doc_title": "Adjustment Record",
+  "archetype": "ledger",
+  "doc_kind": "ledger",
+  "actions": [
+    "record",
+    "apply",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "applied",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 3,
+  "fetch_rule_count": 0,
+  "action_handler_count": 3,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "posting_flow",
+      "supports_reconciliation": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "draft",
+      "applied",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "posting_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "posting_date": "posting_date",
+      "adjustment_amount": "monetary_value"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "adjustment_code",
+      "source_order_payment",
+      "adjustment_type"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "posting_date",
+      "workflow_state"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "applied",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "record": null,
+      "apply": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {},
+  "related_docs": [
+    "refund_case",
+    "payment_attempt",
+    "order_record"
+  ],
+  "borrowed_fields": [
+    "source context from linked payment/order docs"
+  ]
+}

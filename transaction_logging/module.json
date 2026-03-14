@@ -1,0 +1,8 @@
+{
+  "id": "transaction_logging",
+  "title": "Transaction Logging",
+  "app_id": "ecommerce_operations_platform",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

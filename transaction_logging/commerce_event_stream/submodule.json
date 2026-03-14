@@ -1,0 +1,8 @@
+{
+  "id": "commerce_event_stream",
+  "title": "Commerce Event Stream",
+  "app_id": "ecommerce_operations_platform",
+  "module_id": "transaction_logging",
+  "type": "submodule",
+  "status": "draft"
+}

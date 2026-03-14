@@ -1,0 +1,8 @@
+{
+  "id": "account_activity",
+  "title": "Account Activity",
+  "app_id": "ecommerce_operations_platform",
+  "module_id": "customer_accounts",
+  "type": "submodule",
+  "status": "draft"
+}

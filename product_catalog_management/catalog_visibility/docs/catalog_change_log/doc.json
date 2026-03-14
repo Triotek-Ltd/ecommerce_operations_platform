@@ -1,0 +1,27 @@
+{
+  "doc_key": "catalog_change_log",
+  "doc_title": "Catalog Change Log",
+  "doc_kind": "ledger",
+  "status": "draft",
+  "module_id": "product_catalog_management",
+  "submodule_id": "catalog_visibility",
+  "app_id": "ecommerce_operations_platform",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "ledger",
+  "classification": {
+    "archetype": "ledger",
+    "bundle": "platform"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "platform",
+    "app": "ecommerce_operations_platform",
+    "module": "product_catalog_management",
+    "submodule": "catalog_visibility",
+    "reference_doc_id": "catalog_change_log",
+    "evidence_gaps": [
+      "change-source taxonomy",
+      "replay/regeneration rules"
+    ]
+  }
+}

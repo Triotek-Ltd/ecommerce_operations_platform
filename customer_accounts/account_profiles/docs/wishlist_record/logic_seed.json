@@ -1,0 +1,110 @@
+{
+  "doc_id": "wishlist_record",
+  "doc_title": "Wishlist Record",
+  "archetype": "transaction",
+  "doc_kind": "transaction",
+  "actions": [
+    "create",
+    "update",
+    "convert",
+    "remove",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "active",
+    "states": [
+      "active",
+      "converted",
+      "removed",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 3,
+  "fetch_rule_count": 0,
+  "action_handler_count": 5,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "transaction_flow",
+      "supports_submission": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "active",
+      "converted",
+      "removed",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "transaction_date": "transaction_date",
+      "party": "primary_party",
+      "currency": "currency_code",
+      "total_amount": "total_amount",
+      "saved_date": "schedule_marker"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "wishlist_code",
+      "customer_account",
+      "saved_product"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "transaction_date",
+      "party",
+      "total_amount",
+      "workflow_state"
+    ],
+    "initial_state": "active",
+    "lifecycle_states": [
+      "active",
+      "converted",
+      "removed",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "update": null,
+      "convert": null,
+      "remove": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {},
+  "related_docs": [
+    "commerce_customer_account",
+    "catalog_product",
+    "order_record"
+  ],
+  "borrowed_fields": [
+    "account identity from commerce_customer_account",
+    "product display context from catalog_product"
+  ]
+}

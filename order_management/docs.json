@@ -1,0 +1,8 @@
+{
+  "docs": [
+    "fulfillment_case",
+    "order_line",
+    "order_record",
+    "order_status_event"
+  ]
+}
