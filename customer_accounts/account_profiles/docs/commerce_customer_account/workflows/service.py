@@ -11,7 +11,7 @@ TERMINAL_STATES = ['archived']
 ACTION_RULES = {'create': {'allowed_in_states': ['active', 'suspended'], 'transitions_to': None}, 'update': {'allowed_in_states': ['active', 'suspended'], 'transitions_to': None}, 'suspend': {'allowed_in_states': ['active', 'suspended'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['active', 'suspended'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['account_activity_log', 'wishlist_record', 'purchase_history_snapshot', 'customer_account'], 'borrowed_fields': ['base customer identity from sales/CRM customer_account'], 'inferred_roles': ['procurement officer', 'account owner']}, 'actors': ['procurement officer', 'account owner'], 'action_actors': {'create': ['procurement officer'], 'update': ['procurement officer'], 'archive': ['account owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

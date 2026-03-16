@@ -40,7 +40,38 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_checkout_session",
+      "doc_id": "checkout_session",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_order_record",
+      "doc_id": "order_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_payment_intent_record",
+      "doc_id": "payment_intent_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_card_authorization_record",
+      "doc_id": "card_authorization_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_mobile_money_transaction",
+      "doc_id": "mobile_money_transaction",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -48,7 +79,13 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "checkout_session",
+      "order_record",
+      "payment_intent_record",
+      "card_authorization_record",
+      "mobile_money_transaction"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -72,6 +109,46 @@
   "runtime_hints": {
     "doc_key": "payment_attempt",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "checkout_session",
+          "order_record",
+          "payment_intent_record",
+          "card_authorization_record",
+          "mobile_money_transaction"
+        ],
+        "borrowed_fields": [
+          "checkout/order context from linked records",
+          "external payment references from payment integration docs"
+        ],
+        "inferred_roles": [
+          "approver",
+          "account owner",
+          "finance officer"
+        ]
+      },
+      "actors": [
+        "approver",
+        "account owner",
+        "finance officer"
+      ],
+      "action_actors": {
+        "create": [
+          "approver"
+        ],
+        "confirm": [
+          "approver"
+        ],
+        "cancel": [
+          "account owner"
+        ],
+        "archive": [
+          "account owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

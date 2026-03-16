@@ -307,6 +307,102 @@
         "filterable": true,
         "sortable": true
       }
+    },
+    {
+      "field_id": "related_payment_attempt",
+      "label": "Related Payment Attempt",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "payment_attempt",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_processor_event_log",
+      "label": "Related Processor Event Log",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "processor_event_log",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_card_authorization_record",
+      "label": "Related Card Authorization Record",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "card_authorization_record",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_mobile_money_transaction",
+      "label": "Related Mobile Money Transaction",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "mobile_money_transaction",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
     }
   ],
   "field_groups": {
@@ -331,7 +427,12 @@
       "amount",
       "status"
     ],
-    "relations": [],
+    "relations": [
+      "related_payment_attempt",
+      "related_processor_event_log",
+      "related_card_authorization_record",
+      "related_mobile_money_transaction"
+    ],
     "amounts": [],
     "dates": [
       "posting_date",
@@ -397,17 +498,27 @@
     {
       "role_id": "System Manager",
       "actions": [
-        "create",
-        "update",
         "view",
         "list",
         "record",
-        "review",
-        "assign",
-        "track",
-        "monitor",
-        "confirm",
+        "normalize",
         "archive"
+      ]
+    },
+    {
+      "role_id": "approver",
+      "actions": [
+        "view",
+        "list",
+        "record",
+        "archive"
+      ]
+    },
+    {
+      "role_id": "finance officer",
+      "actions": [
+        "view",
+        "list"
       ]
     }
   ],

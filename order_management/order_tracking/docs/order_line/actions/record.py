@@ -8,7 +8,7 @@ ACTION_ID = "record"
 ACTION_RULE = {'allowed_in_states': ['active', 'fulfilled', 'cancelled', 'returned'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['order_record', 'catalog_product', 'fulfillment_case'], 'borrowed_fields': ['catalog/product context from catalog_product', 'order header context from order_record'], 'inferred_roles': ['account owner', 'case owner']}, 'actors': ['account owner', 'case owner'], 'action_actors': {'record': ['account owner'], 'archive': ['account owner']}}
 
 def handle_record(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

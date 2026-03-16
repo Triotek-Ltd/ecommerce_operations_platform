@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'entity_lifecycle', 'case_management': False}, 'reporting_profile': {'supports_snapshots': False, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['active', 'suspended', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'account_status': 'status_flag'}, 'search_fields': ['title', 'reference_no', 'description', 'account_code', 'source_customer_reference', 'account_status'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'active', 'lifecycle_states': ['active', 'suspended', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'suspend': None, 'archive': 'archived'}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'account_status': 'status_flag', 'related_account_activity_log': 'relation_collection', 'related_wishlist_record': 'relation_collection', 'related_purchase_history_snapshot': 'relation_collection', 'related_customer_account': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'account_code', 'source_customer_reference', 'account_status'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'active', 'lifecycle_states': ['active', 'suspended', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'suspend': None, 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['account_activity_log', 'wishlist_record', 'purchase_history_snapshot', 'customer_account'], 'borrowed_fields': ['base customer identity from sales/CRM customer_account'], 'inferred_roles': ['procurement officer', 'account owner']}, 'actors': ['procurement officer', 'account owner'], 'action_actors': {'create': ['procurement officer'], 'update': ['procurement officer'], 'archive': ['account owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': [], 'related_docs': ['account_activity_log', 'wishlist_record', 'purchase_history_snapshot', 'customer_account'], 'action_targets': {'create': None, 'update': None, 'suspend': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "commerce_customer_account"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

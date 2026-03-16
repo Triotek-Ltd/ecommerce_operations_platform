@@ -264,6 +264,102 @@
         "filterable": true,
         "sortable": true
       }
+    },
+    {
+      "field_id": "related_payment_attempt",
+      "label": "Related Payment Attempt",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "payment_attempt",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_adjustment_record",
+      "label": "Related Adjustment Record",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "adjustment_record",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_chargeback_case",
+      "label": "Related Chargeback Case",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "chargeback_case",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_marketplace_return_case",
+      "label": "Related Marketplace Return Case",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "marketplace_return_case",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
     }
   ],
   "field_groups": {
@@ -288,7 +384,12 @@
       "approval_state",
       "settlement_outcome"
     ],
-    "relations": [],
+    "relations": [
+      "related_payment_attempt",
+      "related_adjustment_record",
+      "related_chargeback_case",
+      "related_marketplace_return_case"
+    ],
     "amounts": [],
     "dates": [],
     "parties": [],
@@ -409,17 +510,42 @@
     {
       "role_id": "System Manager",
       "actions": [
-        "create",
-        "update",
         "view",
         "list",
-        "record",
+        "create",
         "review",
-        "assign",
-        "track",
-        "monitor",
-        "confirm",
+        "approve",
+        "reject",
+        "refund",
+        "close",
         "archive"
+      ]
+    },
+    {
+      "role_id": "account owner",
+      "actions": [
+        "view",
+        "list",
+        "create",
+        "close",
+        "archive"
+      ]
+    },
+    {
+      "role_id": "finance officer",
+      "actions": [
+        "view",
+        "list",
+        "review",
+        "approve",
+        "reject"
+      ]
+    },
+    {
+      "role_id": "case owner",
+      "actions": [
+        "view",
+        "list"
       ]
     }
   ],

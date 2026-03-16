@@ -28,7 +28,26 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_refund_case",
+      "doc_id": "refund_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_payment_attempt",
+      "doc_id": "payment_attempt",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_order_record",
+      "doc_id": "order_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -36,7 +55,11 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "refund_case",
+      "payment_attempt",
+      "order_record"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -57,6 +80,37 @@
   "runtime_hints": {
     "doc_key": "adjustment_record",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "refund_case",
+          "payment_attempt",
+          "order_record"
+        ],
+        "borrowed_fields": [
+          "source context from linked payment/order docs"
+        ],
+        "inferred_roles": [
+          "account owner",
+          "finance officer",
+          "case owner"
+        ]
+      },
+      "actors": [
+        "account owner",
+        "finance officer",
+        "case owner"
+      ],
+      "action_actors": {
+        "record": [
+          "account owner"
+        ],
+        "archive": [
+          "account owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

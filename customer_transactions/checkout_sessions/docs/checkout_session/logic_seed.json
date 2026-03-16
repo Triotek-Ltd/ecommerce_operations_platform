@@ -66,7 +66,10 @@
       "party": "primary_party",
       "currency": "currency_code",
       "total_amount": "total_amount",
-      "checkout_status": "status_flag"
+      "checkout_status": "status_flag",
+      "related_payment_attempt": "relation_collection",
+      "related_order_record": "relation_collection",
+      "related_commerce_customer_account": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -105,7 +108,36 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "payment_attempt",
+        "order_record",
+        "commerce_customer_account"
+      ],
+      "borrowed_fields": [
+        "customer/account context from commerce_customer_account"
+      ],
+      "inferred_roles": [
+        "account owner",
+        "finance officer"
+      ]
+    },
+    "actors": [
+      "account owner",
+      "finance officer"
+    ],
+    "action_actors": {
+      "create": [
+        "account owner"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "payment_attempt",
     "order_record",

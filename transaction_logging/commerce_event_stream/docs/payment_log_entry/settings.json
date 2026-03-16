@@ -33,7 +33,32 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_payment_attempt",
+      "doc_id": "payment_attempt",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_processor_event_log",
+      "doc_id": "processor_event_log",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_card_authorization_record",
+      "doc_id": "card_authorization_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_mobile_money_transaction",
+      "doc_id": "mobile_money_transaction",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -41,7 +66,12 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "payment_attempt",
+      "processor_event_log",
+      "card_authorization_record",
+      "mobile_money_transaction"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -62,6 +92,36 @@
   "runtime_hints": {
     "doc_key": "payment_log_entry",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "payment_attempt",
+          "processor_event_log",
+          "card_authorization_record",
+          "mobile_money_transaction"
+        ],
+        "borrowed_fields": [
+          "payment/provider context from linked records"
+        ],
+        "inferred_roles": [
+          "approver",
+          "finance officer"
+        ]
+      },
+      "actors": [
+        "approver",
+        "finance officer"
+      ],
+      "action_actors": {
+        "record": [
+          "approver"
+        ],
+        "archive": [
+          "approver"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

@@ -28,7 +28,20 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_order_record",
+      "doc_id": "order_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_account_activity_log",
+      "doc_id": "account_activity_log",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -36,7 +49,10 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "order_record",
+      "account_activity_log"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -60,6 +76,36 @@
   "runtime_hints": {
     "doc_key": "purchase_history_snapshot",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "commerce_customer_account",
+          "order_record",
+          "account_activity_log"
+        ],
+        "borrowed_fields": [
+          "order",
+          "account context from linked docs"
+        ],
+        "inferred_roles": [
+          "procurement officer",
+          "account owner"
+        ]
+      },
+      "actors": [
+        "procurement officer",
+        "account owner"
+      ],
+      "action_actors": {
+        "create": [
+          "procurement officer"
+        ],
+        "archive": [
+          "account owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

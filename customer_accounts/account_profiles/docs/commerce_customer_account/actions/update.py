@@ -8,7 +8,7 @@ ACTION_ID = "update"
 ACTION_RULE = {'allowed_in_states': ['active', 'suspended'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['account_activity_log', 'wishlist_record', 'purchase_history_snapshot', 'customer_account'], 'borrowed_fields': ['base customer identity from sales/CRM customer_account'], 'inferred_roles': ['procurement officer', 'account owner']}, 'actors': ['procurement officer', 'account owner'], 'action_actors': {'create': ['procurement officer'], 'update': ['procurement officer'], 'archive': ['account owner']}}
 
 def handle_update(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

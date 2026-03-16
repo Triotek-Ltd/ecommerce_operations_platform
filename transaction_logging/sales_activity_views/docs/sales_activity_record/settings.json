@@ -30,7 +30,26 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_order_record",
+      "doc_id": "order_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_commerce_customer_account",
+      "doc_id": "commerce_customer_account",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_analytics_report",
+      "doc_id": "analytics_report",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -38,7 +57,11 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "order_record",
+      "commerce_customer_account",
+      "analytics_report"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -62,6 +85,34 @@
   "runtime_hints": {
     "doc_key": "sales_activity_record",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "order_record",
+          "commerce_customer_account",
+          "analytics_report"
+        ],
+        "borrowed_fields": [
+          "order",
+          "customer context from linked records"
+        ],
+        "inferred_roles": [
+          "account owner"
+        ]
+      },
+      "actors": [
+        "account owner"
+      ],
+      "action_actors": {
+        "create": [
+          "account owner"
+        ],
+        "archive": [
+          "account owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

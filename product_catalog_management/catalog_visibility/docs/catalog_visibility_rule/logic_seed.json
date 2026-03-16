@@ -57,7 +57,9 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "rule_status": "status_flag"
+      "rule_status": "status_flag",
+      "related_catalog_product": "relation_collection",
+      "related_catalog_change_log": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -94,6 +96,8 @@
     }
   },
   "workflow_hints": {},
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "catalog_product",
     "catalog_change_log"

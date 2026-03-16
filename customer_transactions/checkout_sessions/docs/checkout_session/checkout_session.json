@@ -68,7 +68,11 @@
         "checkout_start_end",
         "abandonment_indicator"
       ],
-      "relations": [],
+      "relations": [
+        "related_payment_attempt",
+        "related_order_record",
+        "related_commerce_customer_account"
+      ],
       "amounts": [
         "currency",
         "total_amount"
@@ -437,6 +441,78 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_payment_attempt",
+        "label": "Related Payment Attempt",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "payment_attempt",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_order_record",
+        "label": "Related Order Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "order_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_commerce_customer_account",
+        "label": "Related Commerce Customer Account",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "commerce_customer_account",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -547,17 +623,30 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
-          "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "create",
+          "start",
+          "complete",
+          "abandon",
+          "fail",
           "archive"
+        ]
+      },
+      {
+        "role_id": "account owner",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "finance officer",
+        "actions": [
+          "view",
+          "list"
         ]
       }
     ],
@@ -641,7 +730,26 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_payment_attempt",
+        "doc_id": "payment_attempt",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_order_record",
+        "doc_id": "order_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_commerce_customer_account",
+        "doc_id": "commerce_customer_account",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -649,7 +757,11 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "payment_attempt",
+        "order_record",
+        "commerce_customer_account"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
@@ -670,7 +782,36 @@
     "runtime_hints": {
       "doc_key": "checkout_session",
       "supports_related_lookup": true,
-      "supports_fetch_rules": true
+      "supports_fetch_rules": true,
+      "workflow_hints": {
+        "relation_context": {
+          "related_docs": [
+            "payment_attempt",
+            "order_record",
+            "commerce_customer_account"
+          ],
+          "borrowed_fields": [
+            "customer/account context from commerce_customer_account"
+          ],
+          "inferred_roles": [
+            "account owner",
+            "finance officer"
+          ]
+        },
+        "actors": [
+          "account owner",
+          "finance officer"
+        ],
+        "action_actors": {
+          "create": [
+            "account owner"
+          ],
+          "archive": [
+            "account owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -750,6 +891,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -768,6 +912,32 @@
       "doc_kind": "transaction"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/ecommerce_operations_platform/customer_transactions/checkout_sessions/checkout_session/",
+    "status_field": "workflow_state",
+    "initial_state": "open",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "archive",
+        "source_state": "open",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "payment_attempt",
+      "order_record",
+      "commerce_customer_account"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -775,7 +945,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

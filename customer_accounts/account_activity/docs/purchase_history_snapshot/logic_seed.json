@@ -52,7 +52,9 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "posting_date": "posting_date",
-      "snapshot_date": "schedule_marker"
+      "snapshot_date": "schedule_marker",
+      "related_order_record": "relation_collection",
+      "related_account_activity_log": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -82,7 +84,37 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "commerce_customer_account",
+        "order_record",
+        "account_activity_log"
+      ],
+      "borrowed_fields": [
+        "order",
+        "account context from linked docs"
+      ],
+      "inferred_roles": [
+        "procurement officer",
+        "account owner"
+      ]
+    },
+    "actors": [
+      "procurement officer",
+      "account owner"
+    ],
+    "action_actors": {
+      "create": [
+        "procurement officer"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "commerce_customer_account",
     "order_record",

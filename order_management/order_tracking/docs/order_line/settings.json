@@ -28,7 +28,26 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_order_record",
+      "doc_id": "order_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_catalog_product",
+      "doc_id": "catalog_product",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_fulfillment_case",
+      "doc_id": "fulfillment_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -36,7 +55,11 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "order_record",
+      "catalog_product",
+      "fulfillment_case"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -60,6 +83,36 @@
   "runtime_hints": {
     "doc_key": "order_line",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "order_record",
+          "catalog_product",
+          "fulfillment_case"
+        ],
+        "borrowed_fields": [
+          "catalog/product context from catalog_product",
+          "order header context from order_record"
+        ],
+        "inferred_roles": [
+          "account owner",
+          "case owner"
+        ]
+      },
+      "actors": [
+        "account owner",
+        "case owner"
+      ],
+      "action_actors": {
+        "record": [
+          "account owner"
+        ],
+        "archive": [
+          "account owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

@@ -8,7 +8,7 @@ ACTION_ID = "authorize"
 ACTION_RULE = {'allowed_in_states': ['initiated', 'processing', 'succeeded', 'failed', 'cancelled'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['checkout_session', 'order_record', 'payment_intent_record', 'card_authorization_record', 'mobile_money_transaction'], 'borrowed_fields': ['checkout/order context from linked records', 'external payment references from payment integration docs'], 'inferred_roles': ['approver', 'account owner', 'finance officer']}, 'actors': ['approver', 'account owner', 'finance officer'], 'action_actors': {'create': ['approver'], 'confirm': ['approver'], 'cancel': ['account owner'], 'archive': ['account owner']}}
 
 def handle_authorize(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

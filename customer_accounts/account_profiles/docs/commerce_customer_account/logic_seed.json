@@ -52,7 +52,11 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "account_status": "status_flag"
+      "account_status": "status_flag",
+      "related_account_activity_log": "relation_collection",
+      "related_wishlist_record": "relation_collection",
+      "related_purchase_history_snapshot": "relation_collection",
+      "related_customer_account": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -84,7 +88,40 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "account_activity_log",
+        "wishlist_record",
+        "purchase_history_snapshot",
+        "customer_account"
+      ],
+      "borrowed_fields": [
+        "base customer identity from sales/CRM customer_account"
+      ],
+      "inferred_roles": [
+        "procurement officer",
+        "account owner"
+      ]
+    },
+    "actors": [
+      "procurement officer",
+      "account owner"
+    ],
+    "action_actors": {
+      "create": [
+        "procurement officer"
+      ],
+      "update": [
+        "procurement officer"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "account_activity_log",
     "wishlist_record",

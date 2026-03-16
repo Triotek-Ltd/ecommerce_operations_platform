@@ -390,6 +390,126 @@
         "filterable": true,
         "sortable": true
       }
+    },
+    {
+      "field_id": "related_checkout_session",
+      "label": "Related Checkout Session",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "checkout_session",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_order_record",
+      "label": "Related Order Record",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "order_record",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_payment_intent_record",
+      "label": "Related Payment Intent Record",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "payment_intent_record",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_card_authorization_record",
+      "label": "Related Card Authorization Record",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "card_authorization_record",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_mobile_money_transaction",
+      "label": "Related Mobile Money Transaction",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "mobile_money_transaction",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
     }
   ],
   "field_groups": {
@@ -414,7 +534,13 @@
       "source_processor_reference",
       "failure_reason"
     ],
-    "relations": [],
+    "relations": [
+      "related_checkout_session",
+      "related_order_record",
+      "related_payment_intent_record",
+      "related_card_authorization_record",
+      "related_mobile_money_transaction"
+    ],
     "amounts": [
       "currency",
       "total_amount"
@@ -531,17 +657,39 @@
     {
       "role_id": "System Manager",
       "actions": [
-        "create",
-        "update",
         "view",
         "list",
-        "record",
-        "review",
-        "assign",
-        "track",
-        "monitor",
+        "create",
+        "authorize",
         "confirm",
+        "fail",
+        "cancel",
         "archive"
+      ]
+    },
+    {
+      "role_id": "approver",
+      "actions": [
+        "view",
+        "list",
+        "create",
+        "confirm"
+      ]
+    },
+    {
+      "role_id": "account owner",
+      "actions": [
+        "view",
+        "list",
+        "cancel",
+        "archive"
+      ]
+    },
+    {
+      "role_id": "finance officer",
+      "actions": [
+        "view",
+        "list"
       ]
     }
   ],

@@ -72,7 +72,12 @@
         "approval_state",
         "settlement_outcome"
       ],
-      "relations": [],
+      "relations": [
+        "related_payment_attempt",
+        "related_adjustment_record",
+        "related_chargeback_case",
+        "related_marketplace_return_case"
+      ],
       "amounts": [],
       "dates": [],
       "parties": [],
@@ -330,6 +335,102 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_payment_attempt",
+        "label": "Related Payment Attempt",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "payment_attempt",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_adjustment_record",
+        "label": "Related Adjustment Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "adjustment_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_chargeback_case",
+        "label": "Related Chargeback Case",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "chargeback_case",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_marketplace_return_case",
+        "label": "Related Marketplace Return Case",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "marketplace_return_case",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -452,17 +553,42 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
+          "create",
           "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "approve",
+          "reject",
+          "refund",
+          "close",
           "archive"
+        ]
+      },
+      {
+        "role_id": "account owner",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "close",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "finance officer",
+        "actions": [
+          "view",
+          "list",
+          "review",
+          "approve",
+          "reject"
+        ]
+      },
+      {
+        "role_id": "case owner",
+        "actions": [
+          "view",
+          "list"
         ]
       }
     ],
@@ -545,7 +671,32 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_payment_attempt",
+        "doc_id": "payment_attempt",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_adjustment_record",
+        "doc_id": "adjustment_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_chargeback_case",
+        "doc_id": "chargeback_case",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_marketplace_return_case",
+        "doc_id": "marketplace_return_case",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -553,7 +704,12 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "payment_attempt",
+        "adjustment_record",
+        "chargeback_case",
+        "marketplace_return_case"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
@@ -574,7 +730,51 @@
     "runtime_hints": {
       "doc_key": "refund_case",
       "supports_related_lookup": true,
-      "supports_fetch_rules": true
+      "supports_fetch_rules": true,
+      "workflow_hints": {
+        "relation_context": {
+          "related_docs": [
+            "payment_attempt",
+            "adjustment_record",
+            "chargeback_case",
+            "marketplace_return_case"
+          ],
+          "borrowed_fields": [
+            "source payment/order context from linked records"
+          ],
+          "inferred_roles": [
+            "account owner",
+            "finance officer",
+            "case owner"
+          ]
+        },
+        "actors": [
+          "account owner",
+          "finance officer",
+          "case owner"
+        ],
+        "action_actors": {
+          "create": [
+            "account owner"
+          ],
+          "review": [
+            "finance officer"
+          ],
+          "approve": [
+            "finance officer"
+          ],
+          "reject": [
+            "finance officer"
+          ],
+          "close": [
+            "account owner"
+          ],
+          "archive": [
+            "account owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -650,6 +850,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -669,6 +872,56 @@
       "doc_kind": "workflow_case"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/ecommerce_operations_platform/customer_transactions/payment_adjustments/refund_case/",
+    "status_field": "workflow_state",
+    "initial_state": "requested",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "review",
+        "source_state": "requested",
+        "target_state": "reviewed",
+        "disallowed_state": "closed"
+      },
+      {
+        "action_id": "approve",
+        "source_state": "requested",
+        "target_state": "approved",
+        "disallowed_state": "closed"
+      },
+      {
+        "action_id": "reject",
+        "source_state": "requested",
+        "target_state": "rejected",
+        "disallowed_state": "closed"
+      },
+      {
+        "action_id": "close",
+        "source_state": "requested",
+        "target_state": "closed",
+        "disallowed_state": "closed"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "requested",
+        "target_state": "archived",
+        "disallowed_state": "closed"
+      }
+    ],
+    "related_docs": [
+      "payment_attempt",
+      "adjustment_record",
+      "chargeback_case",
+      "marketplace_return_case"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -676,7 +929,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

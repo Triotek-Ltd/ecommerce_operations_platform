@@ -56,7 +56,12 @@
         "amount",
         "status"
       ],
-      "relations": [],
+      "relations": [
+        "related_payment_attempt",
+        "related_processor_event_log",
+        "related_card_authorization_record",
+        "related_mobile_money_transaction"
+      ],
       "amounts": [],
       "dates": [
         "posting_date",
@@ -360,6 +365,102 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_payment_attempt",
+        "label": "Related Payment Attempt",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "payment_attempt",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_processor_event_log",
+        "label": "Related Processor Event Log",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "processor_event_log",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_card_authorization_record",
+        "label": "Related Card Authorization Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "card_authorization_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_mobile_money_transaction",
+        "label": "Related Mobile Money Transaction",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "mobile_money_transaction",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -424,17 +525,27 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
           "record",
-          "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "normalize",
           "archive"
+        ]
+      },
+      {
+        "role_id": "approver",
+        "actions": [
+          "view",
+          "list",
+          "record",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "finance officer",
+        "actions": [
+          "view",
+          "list"
         ]
       }
     ],
@@ -517,7 +628,32 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_payment_attempt",
+        "doc_id": "payment_attempt",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_processor_event_log",
+        "doc_id": "processor_event_log",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_card_authorization_record",
+        "doc_id": "card_authorization_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_mobile_money_transaction",
+        "doc_id": "mobile_money_transaction",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -525,7 +661,12 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "payment_attempt",
+        "processor_event_log",
+        "card_authorization_record",
+        "mobile_money_transaction"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
@@ -546,7 +687,37 @@
     "runtime_hints": {
       "doc_key": "payment_log_entry",
       "supports_related_lookup": true,
-      "supports_fetch_rules": true
+      "supports_fetch_rules": true,
+      "workflow_hints": {
+        "relation_context": {
+          "related_docs": [
+            "payment_attempt",
+            "processor_event_log",
+            "card_authorization_record",
+            "mobile_money_transaction"
+          ],
+          "borrowed_fields": [
+            "payment/provider context from linked records"
+          ],
+          "inferred_roles": [
+            "approver",
+            "finance officer"
+          ]
+        },
+        "actors": [
+          "approver",
+          "finance officer"
+        ],
+        "action_actors": {
+          "record": [
+            "approver"
+          ],
+          "archive": [
+            "approver"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -622,6 +793,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -637,6 +811,33 @@
       "doc_kind": "ledger"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/ecommerce_operations_platform/transaction_logging/commerce_event_stream/payment_log_entry/",
+    "status_field": "workflow_state",
+    "initial_state": "active",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "posting_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "archive",
+        "source_state": "active",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "payment_attempt",
+      "processor_event_log",
+      "card_authorization_record",
+      "mobile_money_transaction"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -644,7 +845,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

@@ -70,7 +70,11 @@
       "currency": "currency_code",
       "total_amount": "total_amount",
       "order_date": "schedule_marker",
-      "order_status": "status_flag"
+      "order_status": "status_flag",
+      "related_order_line": "relation_collection",
+      "related_fulfillment_case": "relation_collection",
+      "related_payment_attempt": "relation_collection",
+      "related_shipment_record": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -111,7 +115,60 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "business_objective": "track order progression from placement through fulfillment and closure while preserving a complete status trail",
+    "actors": [
+      "commerce engine",
+      "fulfillment owner",
+      "exception handler"
+    ],
+    "start_condition": "a platform order is placed",
+    "ordered_steps": [
+      "Create the order record.",
+      "Confirm the order.",
+      "Emit status events as the order changes.",
+      "Close or cancel the order."
+    ],
+    "primary_actions": [
+      "create",
+      "confirm",
+      "update_status",
+      "cancel",
+      "close"
+    ],
+    "action_actors": {
+      "create": [
+        "commerce engine"
+      ],
+      "confirm": [
+        "commerce engine"
+      ],
+      "update_status": [
+        "fulfillment owner",
+        "exception handler"
+      ],
+      "cancel": [
+        "exception handler"
+      ],
+      "close": [
+        "fulfillment owner"
+      ],
+      "archive": [
+        "fulfillment owner"
+      ]
+    },
+    "primary_transitions": [
+      "order_record: placed -> confirmed -> fulfilled -> closed",
+      "order_record: placed -> cancelled"
+    ],
+    "downstream_effects": [
+      "creates status history and fulfillment follow-up records for customer visibility and operations control"
+    ]
+  },
+  "downstream_effects": [
+    "creates status history and fulfillment follow-up records for customer visibility and operations control"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "order_line",
     "order_status_event",

@@ -52,7 +52,10 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "posting_date": "posting_date",
-      "normalized_status": "status_flag"
+      "normalized_status": "status_flag",
+      "related_order_record": "relation_collection",
+      "related_commerce_event_log": "relation_collection",
+      "related_payment_log_entry": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -82,7 +85,36 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "order_record",
+        "commerce_event_log",
+        "payment_log_entry"
+      ],
+      "borrowed_fields": [
+        "order identity from order_record"
+      ],
+      "inferred_roles": [
+        "account owner",
+        "finance officer"
+      ]
+    },
+    "actors": [
+      "account owner",
+      "finance officer"
+    ],
+    "action_actors": {
+      "record": [
+        "account owner"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "order_record",
     "commerce_event_log",

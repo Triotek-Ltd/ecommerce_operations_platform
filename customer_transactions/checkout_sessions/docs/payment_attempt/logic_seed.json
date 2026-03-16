@@ -66,7 +66,12 @@
       "party": "primary_party",
       "currency": "currency_code",
       "total_amount": "total_amount",
-      "payment_status": "status_flag"
+      "payment_status": "status_flag",
+      "related_checkout_session": "relation_collection",
+      "related_order_record": "relation_collection",
+      "related_payment_intent_record": "relation_collection",
+      "related_card_authorization_record": "relation_collection",
+      "related_mobile_money_transaction": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -105,7 +110,47 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "checkout_session",
+        "order_record",
+        "payment_intent_record",
+        "card_authorization_record",
+        "mobile_money_transaction"
+      ],
+      "borrowed_fields": [
+        "checkout/order context from linked records",
+        "external payment references from payment integration docs"
+      ],
+      "inferred_roles": [
+        "approver",
+        "account owner",
+        "finance officer"
+      ]
+    },
+    "actors": [
+      "approver",
+      "account owner",
+      "finance officer"
+    ],
+    "action_actors": {
+      "create": [
+        "approver"
+      ],
+      "confirm": [
+        "approver"
+      ],
+      "cancel": [
+        "account owner"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "checkout_session",
     "order_record",

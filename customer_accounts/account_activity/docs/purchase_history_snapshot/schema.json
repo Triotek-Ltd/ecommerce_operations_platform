@@ -283,6 +283,54 @@
         "filterable": true,
         "sortable": true
       }
+    },
+    {
+      "field_id": "related_order_record",
+      "label": "Related Order Record",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "order_record",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_account_activity_log",
+      "label": "Related Account Activity Log",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "account_activity_log",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
     }
   ],
   "field_groups": {
@@ -305,7 +353,10 @@
       "lifetime_value_summary",
       "recency_frequency_indicators"
     ],
-    "relations": [],
+    "relations": [
+      "related_order_record",
+      "related_account_activity_log"
+    ],
     "amounts": [],
     "dates": [
       "posting_date",
@@ -373,16 +424,26 @@
     {
       "role_id": "System Manager",
       "actions": [
-        "create",
-        "update",
         "view",
         "list",
-        "record",
-        "review",
-        "assign",
-        "track",
-        "monitor",
-        "confirm",
+        "create",
+        "refresh",
+        "archive"
+      ]
+    },
+    {
+      "role_id": "procurement officer",
+      "actions": [
+        "view",
+        "list",
+        "create"
+      ]
+    },
+    {
+      "role_id": "account owner",
+      "actions": [
+        "view",
+        "list",
         "archive"
       ]
     }

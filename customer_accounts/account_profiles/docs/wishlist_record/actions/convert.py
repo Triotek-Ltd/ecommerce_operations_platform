@@ -8,7 +8,7 @@ ACTION_ID = "convert"
 ACTION_RULE = {'allowed_in_states': ['active', 'converted', 'removed'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['commerce_customer_account', 'catalog_product', 'order_record'], 'borrowed_fields': ['account identity from commerce_customer_account', 'product display context from catalog_product'], 'inferred_roles': ['account owner']}, 'actors': ['account owner'], 'action_actors': {'create': ['account owner'], 'update': ['account owner'], 'archive': ['account owner']}}
 
 def handle_convert(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

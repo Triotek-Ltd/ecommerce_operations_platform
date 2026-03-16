@@ -8,7 +8,7 @@ ACTION_ID = "confirm"
 ACTION_RULE = {'allowed_in_states': ['placed', 'confirmed', 'partially_fulfilled', 'fulfilled', 'cancelled'], 'transitions_to': 'confirmed'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'business_objective': 'track order progression from placement through fulfillment and closure while preserving a complete status trail', 'actors': ['commerce engine', 'fulfillment owner', 'exception handler'], 'start_condition': 'a platform order is placed', 'ordered_steps': ['Create the order record.', 'Confirm the order.', 'Emit status events as the order changes.', 'Close or cancel the order.'], 'primary_actions': ['create', 'confirm', 'update_status', 'cancel', 'close'], 'action_actors': {'create': ['commerce engine'], 'confirm': ['commerce engine'], 'update_status': ['fulfillment owner', 'exception handler'], 'cancel': ['exception handler'], 'close': ['fulfillment owner'], 'archive': ['fulfillment owner']}, 'primary_transitions': ['order_record: placed -> confirmed -> fulfilled -> closed', 'order_record: placed -> cancelled'], 'downstream_effects': ['creates status history and fulfillment follow-up records for customer visibility and operations control']}
 
 def handle_confirm(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

@@ -61,7 +61,9 @@
       "party": "primary_party",
       "currency": "currency_code",
       "total_amount": "total_amount",
-      "saved_date": "schedule_marker"
+      "saved_date": "schedule_marker",
+      "related_catalog_product": "relation_collection",
+      "related_order_record": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -97,7 +99,38 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "commerce_customer_account",
+        "catalog_product",
+        "order_record"
+      ],
+      "borrowed_fields": [
+        "account identity from commerce_customer_account",
+        "product display context from catalog_product"
+      ],
+      "inferred_roles": [
+        "account owner"
+      ]
+    },
+    "actors": [
+      "account owner"
+    ],
+    "action_actors": {
+      "create": [
+        "account owner"
+      ],
+      "update": [
+        "account owner"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "commerce_customer_account",
     "catalog_product",

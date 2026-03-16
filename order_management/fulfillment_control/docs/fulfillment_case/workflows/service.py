@@ -11,7 +11,7 @@ TERMINAL_STATES = ['closed', 'archived']
 ACTION_RULES = {'create': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'resolved', 'escalated'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'in_progress'}, 'review': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'resolved', 'escalated'], 'transitions_to': None}, 'resolve': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'resolved'}, 'escalate': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'escalated'}, 'close': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['order_record', 'order_line', 'shipment_record', 'delivery_exception_case'], 'borrowed_fields': ['order/line context from linked records'], 'inferred_roles': ['account owner', 'operations coordinator', 'case owner']}, 'actors': ['account owner', 'operations coordinator', 'case owner'], 'action_actors': {'create': ['account owner'], 'assign': ['account owner'], 'review': ['operations coordinator'], 'close': ['account owner'], 'archive': ['account owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

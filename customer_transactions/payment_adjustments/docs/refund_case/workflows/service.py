@@ -11,7 +11,7 @@ TERMINAL_STATES = ['closed', 'archived']
 ACTION_RULES = {'create': {'allowed_in_states': ['requested', 'reviewed', 'approved', 'rejected', 'refunded'], 'transitions_to': None}, 'review': {'allowed_in_states': ['requested', 'reviewed', 'approved', 'rejected', 'refunded'], 'transitions_to': 'reviewed'}, 'approve': {'allowed_in_states': ['requested', 'reviewed', 'approved', 'rejected', 'refunded'], 'transitions_to': 'approved'}, 'reject': {'allowed_in_states': ['requested', 'reviewed', 'approved', 'rejected', 'refunded'], 'transitions_to': 'rejected'}, 'refund': {'allowed_in_states': ['requested', 'reviewed', 'approved', 'rejected', 'refunded'], 'transitions_to': None}, 'close': {'allowed_in_states': ['requested', 'reviewed', 'approved', 'rejected', 'refunded'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['requested', 'reviewed', 'approved', 'rejected', 'refunded'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['payment_attempt', 'adjustment_record', 'chargeback_case', 'marketplace_return_case'], 'borrowed_fields': ['source payment/order context from linked records'], 'inferred_roles': ['account owner', 'finance officer', 'case owner']}, 'actors': ['account owner', 'finance officer', 'case owner'], 'action_actors': {'create': ['account owner'], 'review': ['finance officer'], 'approve': ['finance officer'], 'reject': ['finance officer'], 'close': ['account owner'], 'archive': ['account owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

@@ -33,7 +33,32 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_account_activity_log",
+      "doc_id": "account_activity_log",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_wishlist_record",
+      "doc_id": "wishlist_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_purchase_history_snapshot",
+      "doc_id": "purchase_history_snapshot",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_customer_account",
+      "doc_id": "customer_account",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -41,7 +66,12 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "account_activity_log",
+      "wishlist_record",
+      "purchase_history_snapshot",
+      "customer_account"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -62,6 +92,39 @@
   "runtime_hints": {
     "doc_key": "commerce_customer_account",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "account_activity_log",
+          "wishlist_record",
+          "purchase_history_snapshot",
+          "customer_account"
+        ],
+        "borrowed_fields": [
+          "base customer identity from sales/CRM customer_account"
+        ],
+        "inferred_roles": [
+          "procurement officer",
+          "account owner"
+        ]
+      },
+      "actors": [
+        "procurement officer",
+        "account owner"
+      ],
+      "action_actors": {
+        "create": [
+          "procurement officer"
+        ],
+        "update": [
+          "procurement officer"
+        ],
+        "archive": [
+          "account owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

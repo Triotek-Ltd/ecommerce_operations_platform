@@ -391,6 +391,102 @@
         "filterable": true,
         "sortable": true
       }
+    },
+    {
+      "field_id": "related_order_line",
+      "label": "Related Order Line",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "order_line",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_fulfillment_case",
+      "label": "Related Fulfillment Case",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "fulfillment_case",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_payment_attempt",
+      "label": "Related Payment Attempt",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "payment_attempt",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_shipment_record",
+      "label": "Related Shipment Record",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "shipment_record",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
     }
   ],
   "field_groups": {
@@ -415,7 +511,11 @@
       "fulfillment_state"
     ],
     "relations": [
-      "order_status"
+      "order_status",
+      "related_order_line",
+      "related_fulfillment_case",
+      "related_payment_attempt",
+      "related_shipment_record"
     ],
     "amounts": [
       "currency",
@@ -535,17 +635,42 @@
     {
       "role_id": "System Manager",
       "actions": [
-        "create",
-        "update",
         "view",
         "list",
-        "record",
-        "review",
-        "assign",
-        "track",
-        "monitor",
+        "create",
         "confirm",
+        "update_status",
+        "cancel",
+        "close",
         "archive"
+      ]
+    },
+    {
+      "role_id": "commerce engine",
+      "actions": [
+        "view",
+        "list",
+        "create",
+        "confirm"
+      ]
+    },
+    {
+      "role_id": "fulfillment owner",
+      "actions": [
+        "view",
+        "list",
+        "update_status",
+        "close",
+        "archive"
+      ]
+    },
+    {
+      "role_id": "exception handler",
+      "actions": [
+        "view",
+        "list",
+        "update_status",
+        "cancel"
       ]
     }
   ],

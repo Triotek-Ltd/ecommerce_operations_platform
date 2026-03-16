@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'entity_lifecycle', 'case_management': False}, 'reporting_profile': {'supports_snapshots': False, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['draft', 'active', 'unpublished', 'retired', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state'}, 'search_fields': ['title', 'reference_no', 'description', 'catalog_product_code', 'source_product_reference', 'display_title'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'active', 'unpublished', 'retired', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'review': None, 'publish': None, 'unpublish': None, 'archive': 'archived'}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'related_catalog_price': 'relation_collection', 'related_catalog_visibility_rule': 'relation_collection', 'related_catalog_change_log': 'relation_collection', 'related_product_record': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'catalog_product_code', 'source_product_reference', 'display_title'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'active', 'unpublished', 'retired', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'review': None, 'publish': None, 'unpublish': None, 'archive': 'archived'}}
 
 WORKFLOW_HINTS = {}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': [], 'related_docs': ['catalog_price', 'catalog_visibility_rule', 'catalog_change_log', 'product_record'], 'action_targets': {'create': None, 'update': None, 'review': None, 'publish': None, 'unpublish': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "catalog_product"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

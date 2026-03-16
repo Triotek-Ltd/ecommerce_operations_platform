@@ -8,7 +8,7 @@ ACTION_ID = "fail"
 ACTION_RULE = {'allowed_in_states': ['open', 'in_progress', 'completed', 'abandoned', 'failed'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['payment_attempt', 'order_record', 'commerce_customer_account'], 'borrowed_fields': ['customer/account context from commerce_customer_account'], 'inferred_roles': ['account owner', 'finance officer']}, 'actors': ['account owner', 'finance officer'], 'action_actors': {'create': ['account owner'], 'archive': ['account owner']}}
 
 def handle_fail(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

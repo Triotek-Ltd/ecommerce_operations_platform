@@ -1,8 +1,8 @@
 {
   "docs": [
     "account_activity_log",
-    "purchase_history_snapshot",
     "commerce_customer_account",
+    "purchase_history_snapshot",
     "wishlist_record"
   ]
 }

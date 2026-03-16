@@ -40,7 +40,32 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_order_line",
+      "doc_id": "order_line",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_fulfillment_case",
+      "doc_id": "fulfillment_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_payment_attempt",
+      "doc_id": "payment_attempt",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_shipment_record",
+      "doc_id": "shipment_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -48,7 +73,12 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "order_line",
+      "fulfillment_case",
+      "payment_attempt",
+      "shipment_record"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -69,6 +99,57 @@
   "runtime_hints": {
     "doc_key": "order_record",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "business_objective": "track order progression from placement through fulfillment and closure while preserving a complete status trail",
+      "actors": [
+        "commerce engine",
+        "fulfillment owner",
+        "exception handler"
+      ],
+      "start_condition": "a platform order is placed",
+      "ordered_steps": [
+        "Create the order record.",
+        "Confirm the order.",
+        "Emit status events as the order changes.",
+        "Close or cancel the order."
+      ],
+      "primary_actions": [
+        "create",
+        "confirm",
+        "update_status",
+        "cancel",
+        "close"
+      ],
+      "action_actors": {
+        "create": [
+          "commerce engine"
+        ],
+        "confirm": [
+          "commerce engine"
+        ],
+        "update_status": [
+          "fulfillment owner",
+          "exception handler"
+        ],
+        "cancel": [
+          "exception handler"
+        ],
+        "close": [
+          "fulfillment owner"
+        ],
+        "archive": [
+          "fulfillment owner"
+        ]
+      },
+      "primary_transitions": [
+        "order_record: placed -> confirmed -> fulfilled -> closed",
+        "order_record: placed -> cancelled"
+      ],
+      "downstream_effects": [
+        "creates status history and fulfillment follow-up records for customer visibility and operations control"
+      ]
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

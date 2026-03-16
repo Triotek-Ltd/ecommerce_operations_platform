@@ -58,7 +58,10 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "posting_date": "posting_date",
-      "line_status": "status_flag"
+      "line_status": "status_flag",
+      "related_order_record": "relation_collection",
+      "related_catalog_product": "relation_collection",
+      "related_fulfillment_case": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -91,7 +94,37 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "order_record",
+        "catalog_product",
+        "fulfillment_case"
+      ],
+      "borrowed_fields": [
+        "catalog/product context from catalog_product",
+        "order header context from order_record"
+      ],
+      "inferred_roles": [
+        "account owner",
+        "case owner"
+      ]
+    },
+    "actors": [
+      "account owner",
+      "case owner"
+    ],
+    "action_actors": {
+      "record": [
+        "account owner"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "order_record",
     "catalog_product",

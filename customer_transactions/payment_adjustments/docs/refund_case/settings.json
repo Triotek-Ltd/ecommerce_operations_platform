@@ -33,7 +33,32 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_payment_attempt",
+      "doc_id": "payment_attempt",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_adjustment_record",
+      "doc_id": "adjustment_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_chargeback_case",
+      "doc_id": "chargeback_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_marketplace_return_case",
+      "doc_id": "marketplace_return_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -41,7 +66,12 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "payment_attempt",
+      "adjustment_record",
+      "chargeback_case",
+      "marketplace_return_case"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -62,6 +92,50 @@
   "runtime_hints": {
     "doc_key": "refund_case",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "payment_attempt",
+          "adjustment_record",
+          "chargeback_case",
+          "marketplace_return_case"
+        ],
+        "borrowed_fields": [
+          "source payment/order context from linked records"
+        ],
+        "inferred_roles": [
+          "account owner",
+          "finance officer",
+          "case owner"
+        ]
+      },
+      "actors": [
+        "account owner",
+        "finance officer",
+        "case owner"
+      ],
+      "action_actors": {
+        "create": [
+          "account owner"
+        ],
+        "review": [
+          "finance officer"
+        ],
+        "approve": [
+          "finance officer"
+        ],
+        "reject": [
+          "finance officer"
+        ],
+        "close": [
+          "account owner"
+        ],
+        "archive": [
+          "account owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }
