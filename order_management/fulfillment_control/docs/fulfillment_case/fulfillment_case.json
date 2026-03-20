@@ -15,6 +15,291 @@
   },
   "doc_key": "fulfillment_case",
   "doc_title": "Fulfillment Case",
+  "ui": {
+    "icon_key": "checklist",
+    "accent": "#2d6a4f",
+    "logo_image": null,
+    "cover_image": null,
+    "preferred_views": [
+      "list",
+      "table",
+      "detail",
+      "report"
+    ],
+    "default_density": "comfortable"
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "doc",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "records",
+      "flatten_submodules_in_ui": false,
+      "views": [
+        "list",
+        "table",
+        "detail",
+        "report"
+      ]
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Fulfillment Case KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "fulfillment_case",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Fulfillment Case summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "fulfillment_case",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Fulfillment Case charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "fulfillment_case",
+          "metric_family": "trend"
+        }
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Fulfillment Case reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "fulfillment_case",
+          "metric_family": "reporting"
+        }
+      },
+      {
+        "id": "records",
+        "type": "record_table",
+        "title": "Fulfillment Case records",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "fulfillment_case",
+          "metric_family": "records"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "fulfillment_case",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "fulfillment_case",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "fulfillment_case",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "fulfillment_case",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Fulfillment Case Overview",
+        "report_type": "dashboard_summary",
+        "surface": "doc"
+      },
+      {
+        "id": "trend_report",
+        "label": "Fulfillment Case Trends",
+        "report_type": "trend_analysis",
+        "surface": "doc"
+      },
+      {
+        "id": "summary_report",
+        "label": "Fulfillment Case Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Fulfillment Case Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "supports_outputs": true,
+    "supports_print_formats": true,
+    "default_views": [
+      "summary",
+      "trend",
+      "report_table"
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "fulfillment_case_trend_line",
+        "label": "Fulfillment Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "fulfillment_case_volume_column",
+        "label": "Fulfillment Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "fulfillment_case_distribution_donut",
+        "label": "Fulfillment Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "order_record",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case",
+      "retention_policy"
+    ],
+    "upstream_docs": [
+      "order_record",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case"
+    ],
+    "downstream_docs": [
+      "delivery_exception_case"
+    ],
+    "borrowed_fields": [
+      "order/line context from linked records"
+    ],
+    "emits_records": [
+      {
+        "action_id": "resolve",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "assign",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      }
+    ],
+    "downstream_effects": [],
+    "actors": [
+      "account owner",
+      "operations coordinator",
+      "case owner"
+    ],
+    "handoff_targets": [
+      "order_record",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "order_line",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "shipment_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "resolve"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "assign"
+      }
+    ]
+  },
   "allowed_actions": [
     "create",
     "assign",
@@ -115,7 +400,7 @@
         "label": "Reference No",
         "type": "Data",
         "required": false,
-        "read_only": false,
+        "read_only": true,
         "default": null,
         "unique": false,
         "options": null,
@@ -186,18 +471,19 @@
         "allow_on_submit": false,
         "indexed": true,
         "ui": {
-          "visible": true,
+          "visible": false,
           "list_visible": true,
           "filterable": true,
           "sortable": true
-        }
+        },
+        "hidden": true
       },
       {
         "field_id": "case_code",
         "label": "Case Code",
         "type": "Data",
         "required": false,
-        "read_only": false,
+        "read_only": true,
         "default": null,
         "unique": false,
         "options": null,
@@ -219,13 +505,13 @@
       {
         "field_id": "source_order_or_line",
         "label": "Source Order Or Line",
-        "type": "Table",
+        "type": "JSON",
         "required": false,
         "read_only": false,
         "default": null,
         "unique": false,
         "options": null,
-        "purpose": null,
+        "purpose": "structured_payload",
         "linked_doc": null,
         "depends_on": null,
         "mandatory_depends_on": null,
@@ -358,7 +644,8 @@
           "list_visible": false,
           "filterable": false,
           "sortable": false
-        }
+        },
+        "relation_kind": "explicit"
       },
       {
         "field_id": "related_order_line",
@@ -382,7 +669,8 @@
           "list_visible": false,
           "filterable": false,
           "sortable": false
-        }
+        },
+        "relation_kind": "explicit"
       },
       {
         "field_id": "related_shipment_record",
@@ -406,7 +694,8 @@
           "list_visible": false,
           "filterable": false,
           "sortable": false
-        }
+        },
+        "relation_kind": "explicit"
       },
       {
         "field_id": "related_delivery_exception_case",
@@ -430,7 +719,8 @@
           "list_visible": false,
           "filterable": false,
           "sortable": false
-        }
+        },
+        "relation_kind": "explicit"
       }
     ],
     "title_field": "title",
@@ -459,7 +749,12 @@
       "supports_attachments": true,
       "supports_comments": true,
       "supports_activity_log": true,
-      "supports_assignments": true
+      "supports_assignments": true,
+      "is_submittable": false,
+      "supports_submission_snapshot": true,
+      "supports_official_outputs": true,
+      "supports_evidence_pack": true,
+      "supports_signoff": false
     },
     "lifecycle": {
       "initial_state": "opened",
@@ -562,7 +857,9 @@
           "escalate",
           "close",
           "archive"
-        ]
+        ],
+        "scope": "system",
+        "ownership": "platform"
       },
       {
         "role_id": "account owner",
@@ -570,10 +867,13 @@
           "view",
           "list",
           "create",
+          "update",
           "assign",
           "close",
           "archive"
-        ]
+        ],
+        "scope": "execution",
+        "ownership": "finance"
       },
       {
         "role_id": "operations coordinator",
@@ -581,16 +881,34 @@
           "view",
           "list",
           "review"
-        ]
+        ],
+        "scope": "execution",
+        "ownership": "operations"
       },
       {
         "role_id": "case owner",
         "actions": [
           "view",
           "list"
-        ]
+        ],
+        "scope": "document",
+        "ownership": "functional"
       }
     ],
+    "submission_snapshot_policy": {
+      "enabled": true,
+      "trigger_action": "submit",
+      "freeze_fields_after_snapshot": true,
+      "retain_snapshot_history": true,
+      "snapshot_label_template": "{reference_no}-{workflow_state}"
+    },
+    "signature_policy": {
+      "enabled": false,
+      "mode": "approval",
+      "required_roles": [],
+      "reason_required": false,
+      "counter_signature_required": false
+    },
     "transaction_behavior": {
       "is_transactional": false,
       "transaction_kind": null,
@@ -602,7 +920,8 @@
       "party_model": {
         "primary_party_field": null,
         "counterparty_field": null,
-        "party_roles": []
+        "party_roles": [],
+        "specific_party_field": null
       },
       "value_model": {
         "currency_field": null,
@@ -610,9 +929,13 @@
         "balance_impact": "none"
       },
       "reference_model": {
-        "reference_no_field": "reference_no",
+        "reference_no_field": "case_code",
         "upstream_links": [],
-        "downstream_links": []
+        "downstream_links": [],
+        "generated_identifier_fields": [
+          "reference_no",
+          "case_code"
+        ]
       },
       "line_items": {
         "enabled": false,
@@ -623,7 +946,7 @@
         "amount_field": null
       },
       "fulfilment": {
-        "enabled": false,
+        "enabled": true,
         "dispatch_state_field": null,
         "delivery_state_field": null,
         "completion_action": "confirm"
@@ -631,7 +954,69 @@
       "audit": {
         "track_state_history": true,
         "track_action_log": true,
-        "track_external_refs": true
+        "track_external_refs": true,
+        "require_reason_for_change": false,
+        "require_action_comment": false,
+        "hash_official_outputs": false
+      },
+      "records_management": {
+        "retention_policy_ref": "administration.office_administration.filing_records_management.retention_disposal.retention_policy",
+        "legal_hold_enabled": false,
+        "disposition_action": "archive",
+        "immutable_after_submit": true,
+        "official_copy_on_submit": false,
+        "chain_of_custody_required": false,
+        "retention_trigger_field": null,
+        "legal_hold_field": null
+      },
+      "evidence_policy": {
+        "required_attachments": [],
+        "required_references": [],
+        "required_approvals": [],
+        "verification_fields": []
+      },
+      "legal_hold_policy": {
+        "enabled": false,
+        "hold_field": null,
+        "restrict_disposition_while_active": true,
+        "allow_override_roles": []
+      },
+      "official_copy_policy": {
+        "enabled": true,
+        "format": "pdf",
+        "generate_on_submit": false,
+        "hash_outputs": false,
+        "include_audit_summary": true,
+        "include_attachments_index": true
+      },
+      "chain_of_custody_policy": {
+        "enabled": false,
+        "custody_event_field": null,
+        "require_transfer_reason": false,
+        "require_actor_identity": true
+      },
+      "settlement": {
+        "enabled": true,
+        "source_fields": [],
+        "target_doc_types": [
+          "delivery_exception_case"
+        ],
+        "allocation_field": null,
+        "requires_reference_selection": true
+      },
+      "actor_validation": {
+        "enabled": false,
+        "required_events": [],
+        "verification_fields": [],
+        "signature_required_on": [],
+        "counterparty_confirmation_required": false
+      },
+      "external_reference_model": {
+        "enabled": false,
+        "primary_source_reference_field": null,
+        "source_reference_fields": [],
+        "reference_kinds": [],
+        "allow_multiple": false
       }
     }
   },
@@ -646,7 +1031,119 @@
         "modified"
       ],
       "default_filters": [],
-      "quick_entry": false
+      "quick_entry": false,
+      "form_layout": {
+        "version": 1,
+        "tabs": [
+          {
+            "id": "overview",
+            "label": "Overview",
+            "sections": [
+              {
+                "id": "identity",
+                "label": "Identity",
+                "columns": [
+                  {
+                    "id": "identity_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "title"
+                    ]
+                  },
+                  {
+                    "id": "identity_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "reference_no"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "status",
+                "label": "Workflow",
+                "columns": [
+                  {
+                    "id": "status_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "workflow_state"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "details",
+            "label": "Details",
+            "sections": [
+              {
+                "id": "content",
+                "label": "Details",
+                "columns": [
+                  {
+                    "id": "content_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "case_code",
+                      "assigned_owner",
+                      "case_state"
+                    ]
+                  },
+                  {
+                    "id": "content_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "fulfillment_issue_type",
+                      "remediation_action"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "content_details",
+                "label": "Description",
+                "columns": [
+                  {
+                    "id": "content_details_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "description"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "related",
+            "label": "Related",
+            "sections": [
+              {
+                "id": "relations",
+                "label": "Related Records",
+                "columns": [
+                  {
+                    "id": "relations_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "source_order_or_line"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     "related_docs": [
       {
@@ -696,7 +1193,23 @@
         "purpose": "relation_collection"
       }
     ],
-    "fetch_rules": [],
+    "fetch_rules": [
+      {
+        "source_field": "related_order_record",
+        "doc_id": "order_record",
+        "mode": "context"
+      },
+      {
+        "source_field": "related_order_line",
+        "doc_id": "order_line",
+        "mode": "context"
+      },
+      {
+        "source_field": "related_delivery_exception_case",
+        "doc_id": "delivery_exception_case",
+        "mode": "context"
+      }
+    ],
     "reference_map": {
       "primary_reference_field": "reference_no",
       "reference_labels": []
@@ -714,13 +1227,32 @@
     "borrowed_fields": [
       {
         "description": "order/line context from linked records"
+      },
+      {
+        "field_id": "related_order_record",
+        "doc_id": "order_record",
+        "description": "Borrow context from order_record through related_order_record."
+      },
+      {
+        "field_id": "related_order_line",
+        "doc_id": "order_line",
+        "description": "Borrow context from order_line through related_order_line."
+      },
+      {
+        "field_id": "related_delivery_exception_case",
+        "doc_id": "delivery_exception_case",
+        "description": "Borrow context from delivery_exception_case through related_delivery_exception_case."
       }
     ],
     "ui_panels": {
       "show_activity_log": true,
       "show_comments": true,
       "show_assignments": true,
-      "show_related_docs": true
+      "show_related_docs": true,
+      "show_kpis": true,
+      "show_summaries": true,
+      "show_charts": true,
+      "show_reports": true
     },
     "integration": {
       "external_refs": [],
@@ -770,7 +1302,21 @@
           ]
         }
       },
-      "action_side_effects_file": "side_effects.json"
+      "action_side_effects_file": "side_effects.json",
+      "supports_official_copy": true,
+      "supports_evidence_timeline": true,
+      "supports_chain_of_custody": false
+    },
+    "dashboard": {
+      "metric_blocks": [
+        "kpis",
+        "summaries",
+        "charts",
+        "reports",
+        "records"
+      ],
+      "default_view": "list",
+      "reporting_surface": "doc"
     }
   },
   "classification": {
@@ -791,7 +1337,8 @@
       "party_model": {
         "primary_party_field": null,
         "counterparty_field": null,
-        "party_roles": []
+        "party_roles": [],
+        "specific_party_field": null
       },
       "value_model": {
         "currency_field": null,
@@ -799,9 +1346,13 @@
         "balance_impact": "none"
       },
       "reference_model": {
-        "reference_no_field": "reference_no",
+        "reference_no_field": "case_code",
         "upstream_links": [],
-        "downstream_links": []
+        "downstream_links": [],
+        "generated_identifier_fields": [
+          "reference_no",
+          "case_code"
+        ]
       },
       "line_items": {
         "enabled": false,
@@ -812,7 +1363,7 @@
         "amount_field": null
       },
       "fulfilment": {
-        "enabled": false,
+        "enabled": true,
         "dispatch_state_field": null,
         "delivery_state_field": null,
         "completion_action": "confirm"
@@ -820,12 +1371,100 @@
       "audit": {
         "track_state_history": true,
         "track_action_log": true,
-        "track_external_refs": true
+        "track_external_refs": true,
+        "require_reason_for_change": false,
+        "require_action_comment": false,
+        "hash_official_outputs": false
+      },
+      "records_management": {
+        "retention_policy_ref": "administration.office_administration.filing_records_management.retention_disposal.retention_policy",
+        "legal_hold_enabled": false,
+        "disposition_action": "archive",
+        "immutable_after_submit": true,
+        "official_copy_on_submit": false,
+        "chain_of_custody_required": false,
+        "retention_trigger_field": null,
+        "legal_hold_field": null
+      },
+      "evidence_policy": {
+        "required_attachments": [],
+        "required_references": [],
+        "required_approvals": [],
+        "verification_fields": []
+      },
+      "legal_hold_policy": {
+        "enabled": false,
+        "hold_field": null,
+        "restrict_disposition_while_active": true,
+        "allow_override_roles": []
+      },
+      "official_copy_policy": {
+        "enabled": true,
+        "format": "pdf",
+        "generate_on_submit": false,
+        "hash_outputs": false,
+        "include_audit_summary": true,
+        "include_attachments_index": true
+      },
+      "chain_of_custody_policy": {
+        "enabled": false,
+        "custody_event_field": null,
+        "require_transfer_reason": false,
+        "require_actor_identity": true
+      },
+      "settlement": {
+        "enabled": true,
+        "source_fields": [],
+        "target_doc_types": [
+          "delivery_exception_case"
+        ],
+        "allocation_field": null,
+        "requires_reference_selection": true
+      },
+      "actor_validation": {
+        "enabled": false,
+        "required_events": [],
+        "verification_fields": [],
+        "signature_required_on": [],
+        "counterparty_confirmation_required": false
+      },
+      "external_reference_model": {
+        "enabled": false,
+        "primary_source_reference_field": null,
+        "source_reference_fields": [],
+        "reference_kinds": [],
+        "allow_multiple": false
       }
     },
+    "submission_snapshot_policy": {
+      "enabled": true,
+      "trigger_action": "submit",
+      "freeze_fields_after_snapshot": true,
+      "retain_snapshot_history": true,
+      "snapshot_label_template": "{reference_no}-{workflow_state}"
+    },
+    "signature_policy": {
+      "enabled": false,
+      "mode": "approval",
+      "required_roles": [],
+      "reason_required": false,
+      "counter_signature_required": false
+    },
+    "records_profile": {
+      "record_class": "business_record",
+      "legal_significance": "standard",
+      "confidentiality": "internal",
+      "official_copy_format": "pdf",
+      "evidence_gaps": []
+    },
     "report_boundary_classification": "workflow/support doc",
-    "validation_status": "ready",
-    "validation_warnings": []
+    "validation_status": "warning",
+    "validation_warnings": [
+      "helper_relation_field:related_order_record",
+      "helper_relation_field:related_order_line",
+      "helper_relation_field:related_shipment_record",
+      "helper_relation_field:related_delivery_exception_case"
+    ]
   },
   "business_logic": {
     "seeded": true,
@@ -873,6 +1512,15 @@
     "api_base_path": "/apis/ecommerce_operations_platform/order_management/fulfillment_control/fulfillment_case/",
     "status_field": "workflow_state",
     "initial_state": "opened",
+    "actions": [
+      "create",
+      "assign",
+      "review",
+      "resolve",
+      "escalate",
+      "close",
+      "archive"
+    ],
     "required_fields": [
       "title",
       "workflow_state"
@@ -915,7 +1563,115 @@
       "shipment_record",
       "delivery_exception_case"
     ],
+    "records_profile": {
+      "record_class": "business_record",
+      "legal_significance": "standard",
+      "confidentiality": "internal",
+      "official_copy_format": "pdf",
+      "evidence_gaps": []
+    },
+    "submission_snapshot_policy": {
+      "enabled": true,
+      "trigger_action": "submit",
+      "freeze_fields_after_snapshot": true,
+      "retain_snapshot_history": true,
+      "snapshot_label_template": "{reference_no}-{workflow_state}"
+    },
+    "signature_policy": {
+      "enabled": false,
+      "mode": "approval",
+      "required_roles": [],
+      "reason_required": false,
+      "counter_signature_required": false
+    },
+    "records_management": {
+      "retention_policy_ref": "administration.office_administration.filing_records_management.retention_disposal.retention_policy",
+      "legal_hold_enabled": false,
+      "disposition_action": "archive",
+      "immutable_after_submit": true,
+      "official_copy_on_submit": false,
+      "chain_of_custody_required": false,
+      "retention_trigger_field": null,
+      "legal_hold_field": null
+    },
+    "legal_hold_policy": {
+      "enabled": false,
+      "hold_field": null,
+      "restrict_disposition_while_active": true,
+      "allow_override_roles": []
+    },
+    "official_copy_policy": {
+      "enabled": true,
+      "format": "pdf",
+      "generate_on_submit": false,
+      "hash_outputs": false,
+      "include_audit_summary": true,
+      "include_attachments_index": true
+    },
+    "evidence_policy": {
+      "required_attachments": [],
+      "required_references": [],
+      "required_approvals": [],
+      "verification_fields": []
+    },
+    "chain_of_custody_policy": {
+      "enabled": false,
+      "custody_event_field": null,
+      "require_transfer_reason": false,
+      "require_actor_identity": true
+    },
     "downstream_effects": [],
+    "role_action_matrix": [
+      {
+        "role_id": "System Manager",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "assign",
+          "review",
+          "resolve",
+          "escalate",
+          "close",
+          "archive"
+        ],
+        "scope": "system",
+        "ownership": "platform"
+      },
+      {
+        "role_id": "account owner",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "update",
+          "assign",
+          "close",
+          "archive"
+        ],
+        "scope": "execution",
+        "ownership": "finance"
+      },
+      {
+        "role_id": "operations coordinator",
+        "actions": [
+          "view",
+          "list",
+          "review"
+        ],
+        "scope": "execution",
+        "ownership": "operations"
+      },
+      {
+        "role_id": "case owner",
+        "actions": [
+          "view",
+          "list"
+        ],
+        "scope": "document",
+        "ownership": "functional"
+      }
+    ],
     "action_side_effects_file": "side_effects.json"
   },
   "runtime": {

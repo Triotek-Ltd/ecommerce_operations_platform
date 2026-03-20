@@ -9,7 +9,134 @@
       "workflow_state"
     ],
     "default_filters": [],
-    "quick_entry": false
+    "quick_entry": false,
+    "form_layout": {
+      "version": 1,
+      "tabs": [
+        {
+          "id": "overview",
+          "label": "Overview",
+          "sections": [
+            {
+              "id": "identity",
+              "label": "Identity",
+              "columns": [
+                {
+                  "id": "identity_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "title"
+                  ]
+                },
+                {
+                  "id": "identity_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "reference_no"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "parties",
+              "label": "Parties",
+              "columns": [
+                {
+                  "id": "parties_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "customer_account"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "dates",
+              "label": "Dates",
+              "columns": [
+                {
+                  "id": "dates_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "posting_date"
+                  ]
+                },
+                {
+                  "id": "dates_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "event_time"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "status",
+              "label": "Workflow",
+              "columns": [
+                {
+                  "id": "status_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "workflow_state"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "details",
+          "label": "Details",
+          "sections": [
+            {
+              "id": "content",
+              "label": "Details",
+              "columns": [
+                {
+                  "id": "content_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "activity_code",
+                    "source_channel"
+                  ]
+                },
+                {
+                  "id": "content_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "activity_type",
+                    "related_object_reference"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "content_details",
+              "label": "Description",
+              "columns": [
+                {
+                  "id": "content_details_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "description"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   },
   "related_docs": [
     {
@@ -26,6 +153,11 @@
       "doc_id": "purchase_history_snapshot",
       "relation_type": "related",
       "show_in_related_panel": true
+    },
+    {
+      "doc_id": "object_reference",
+      "relation_type": "related",
+      "show_in_related_panel": true
     }
   ],
   "lookup_rules": [
@@ -40,9 +172,27 @@
       "doc_id": "purchase_history_snapshot",
       "lookup_mode": "multiple",
       "purpose": "relation_collection"
+    },
+    {
+      "field_id": "customer_account",
+      "doc_id": "commerce_customer_account",
+      "lookup_mode": "single",
+      "purpose": "relation"
+    },
+    {
+      "field_id": "related_object_reference",
+      "doc_id": "object_reference",
+      "lookup_mode": "single",
+      "purpose": "relation"
     }
   ],
-  "fetch_rules": [],
+  "fetch_rules": [
+    {
+      "source_field": "customer_account",
+      "doc_id": "commerce_customer_account",
+      "mode": "context"
+    }
+  ],
   "reference_map": {
     "primary_reference_field": "reference_no",
     "reference_labels": []
@@ -50,6 +200,8 @@
   "relation_rules": {
     "parent_doc": null,
     "child_docs": [
+      "commerce_customer_account",
+      "object_reference",
       "commerce_event_log",
       "purchase_history_snapshot"
     ],
@@ -58,13 +210,22 @@
   "borrowed_fields": [
     {
       "description": "account identity from commerce_customer_account"
+    },
+    {
+      "field_id": "customer_account",
+      "doc_id": "commerce_customer_account",
+      "description": "Borrow context from commerce_customer_account through customer_account."
     }
   ],
   "ui_panels": {
     "show_activity_log": true,
     "show_comments": true,
     "show_assignments": true,
-    "show_related_docs": true
+    "show_related_docs": true,
+    "show_kpis": true,
+    "show_summaries": true,
+    "show_charts": true,
+    "show_reports": true
   },
   "integration": {
     "external_refs": [],
@@ -105,6 +266,20 @@
         ]
       }
     },
-    "action_side_effects_file": "side_effects.json"
+    "action_side_effects_file": "side_effects.json",
+    "supports_official_copy": true,
+    "supports_evidence_timeline": true,
+    "supports_chain_of_custody": false
+  },
+  "dashboard": {
+    "metric_blocks": [
+      "kpis",
+      "summaries",
+      "charts",
+      "reports",
+      "records"
+    ],
+    "default_view": "list",
+    "reporting_surface": "doc"
   }
 }

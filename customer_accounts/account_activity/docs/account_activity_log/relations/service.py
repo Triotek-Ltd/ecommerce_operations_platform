@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "account_activity_log"
-RELATED_DOCS = [{'doc_id': 'commerce_customer_account', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'commerce_event_log', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'purchase_history_snapshot', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'commerce_customer_account', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'commerce_event_log', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'purchase_history_snapshot', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'object_reference', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'customer_account', 'doc_id': 'commerce_customer_account', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'account identity from commerce_customer_account'}]
+BORROWED_FIELDS = [{'description': 'account identity from commerce_customer_account'}, {'field_id': 'customer_account', 'doc_id': 'commerce_customer_account', 'description': 'Borrow context from commerce_customer_account through customer_account.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

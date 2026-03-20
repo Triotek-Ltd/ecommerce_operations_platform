@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "catalog_price"
-RELATED_DOCS = [{'doc_id': 'catalog_product', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'pricing_decision', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'catalog_change_log', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'catalog_product', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'pricing_decision', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'catalog_change_log', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'party_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'party', 'doc_id': 'party_record', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'source pricing context from pricing_decision'}, {'description': 'product identity from catalog_product'}]
+BORROWED_FIELDS = [{'description': 'source pricing context from pricing_decision'}, {'description': 'product identity from catalog_product'}, {'field_id': 'party', 'doc_id': 'party_record', 'description': 'Borrow context from party_record through party.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

@@ -4,5 +4,852 @@
   "app_id": "ecommerce_operations_platform",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Order Management KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "order_management",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Order Management summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "order_management",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Order Management charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "order_management",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "order_management_trend_line",
+            "label": "Order Management trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "order_management_volume_column",
+            "label": "Order Management volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "order_management_distribution_donut",
+            "label": "Order Management distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "fulfillment_case_trend_line",
+            "label": "Fulfillment Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "fulfillment_case_volume_column",
+            "label": "Fulfillment Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "fulfillment_case_distribution_donut",
+            "label": "Fulfillment Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "order_line_trend_line",
+            "label": "Order Line trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "order_line_volume_column",
+            "label": "Order Line volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "order_line_distribution_donut",
+            "label": "Order Line distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "order_record_trend_line",
+            "label": "Order Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "order_record_volume_column",
+            "label": "Order Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "order_record_distribution_donut",
+            "label": "Order Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "order_status_event_trend_line",
+            "label": "Order Status Event trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "order_status_event_volume_column",
+            "label": "Order Status Event volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "order_status_event_distribution_donut",
+            "label": "Order Status Event distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Order Management reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "order_management",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "order_management",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "order_management",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "order_management",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "order_management",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Order Management Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Order Management Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Fulfillment Case Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Fulfillment Case Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "order_management_trend_line",
+        "label": "Order Management trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_management_volume_column",
+        "label": "Order Management volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_management_distribution_donut",
+        "label": "Order Management distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "fulfillment_case_trend_line",
+        "label": "Fulfillment Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "fulfillment_case_volume_column",
+        "label": "Fulfillment Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "fulfillment_case_distribution_donut",
+        "label": "Fulfillment Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "order_line_trend_line",
+        "label": "Order Line trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_line_volume_column",
+        "label": "Order Line volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_line_distribution_donut",
+        "label": "Order Line distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "order_record_trend_line",
+        "label": "Order Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_record_volume_column",
+        "label": "Order Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_record_distribution_donut",
+        "label": "Order Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "order_status_event_trend_line",
+        "label": "Order Status Event trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_status_event_volume_column",
+        "label": "Order Status Event volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_status_event_distribution_donut",
+        "label": "Order Status Event distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "fulfillment_case",
+        "title": "Fulfillment Case",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "order_line",
+        "title": "Order Line",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "order_record",
+        "title": "Order Record",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "order_status_event",
+        "title": "Order Status Event",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "order_record",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case",
+      "catalog_product",
+      "fulfillment_case",
+      "order_status_event",
+      "payment_attempt",
+      "commerce_event_log",
+      "payment_log_entry"
+    ],
+    "upstream_docs": [
+      "order_record",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case",
+      "catalog_product",
+      "fulfillment_case",
+      "order_status_event",
+      "payment_attempt",
+      "commerce_event_log",
+      "payment_log_entry"
+    ],
+    "downstream_docs": [
+      "delivery_exception_case",
+      "order_status_event",
+      "shipment_record",
+      "fulfillment_case"
+    ],
+    "actors": [
+      "account owner",
+      "operations coordinator",
+      "case owner",
+      "commerce engine",
+      "fulfillment owner",
+      "exception handler",
+      "finance officer"
+    ],
+    "downstream_effects": [
+      "creates status history and fulfillment follow-up records for customer visibility and operations control"
+    ],
+    "emits_records": [
+      {
+        "action_id": "resolve",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "assign",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "confirm",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "confirm",
+        "target_doc": "shipment_record",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "cancel",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "fulfillment_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "update_status",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "order_record",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case",
+      "catalog_product",
+      "fulfillment_case",
+      "order_status_event",
+      "payment_attempt",
+      "commerce_event_log",
+      "payment_log_entry"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "order_line",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "shipment_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "resolve"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "assign"
+      },
+      {
+        "source_doc": "order_line",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_line",
+        "target_doc": "catalog_product",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_line",
+        "target_doc": "fulfillment_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_line",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "fulfillment_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "shipment_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "shipment_record",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "cancel"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "fulfillment_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "update_status"
+      },
+      {
+        "source_doc": "order_status_event",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_status_event",
+        "target_doc": "commerce_event_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_status_event",
+        "target_doc": "payment_log_entry",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "order_record",
+          "kind": "doc"
+        },
+        {
+          "id": "order_line",
+          "kind": "doc"
+        },
+        {
+          "id": "shipment_record",
+          "kind": "doc"
+        },
+        {
+          "id": "delivery_exception_case",
+          "kind": "doc"
+        },
+        {
+          "id": "catalog_product",
+          "kind": "doc"
+        },
+        {
+          "id": "fulfillment_case",
+          "kind": "doc"
+        },
+        {
+          "id": "order_status_event",
+          "kind": "doc"
+        },
+        {
+          "id": "payment_attempt",
+          "kind": "doc"
+        },
+        {
+          "id": "commerce_event_log",
+          "kind": "doc"
+        },
+        {
+          "id": "payment_log_entry",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "order_line",
+          "relation": "references"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "shipment_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "create_record",
+          "action_id": "resolve"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "create_record",
+          "action_id": "assign"
+        },
+        {
+          "source_doc": "order_line",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_line",
+          "target_doc": "catalog_product",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_line",
+          "target_doc": "fulfillment_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_line",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "fulfillment_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "shipment_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "create_record",
+          "action_id": "confirm"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "shipment_record",
+          "relation": "create_record",
+          "action_id": "confirm"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "create_record",
+          "action_id": "cancel"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "fulfillment_case",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "create_record",
+          "action_id": "update_status"
+        },
+        {
+          "source_doc": "order_status_event",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_status_event",
+          "target_doc": "commerce_event_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_status_event",
+          "target_doc": "payment_log_entry",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

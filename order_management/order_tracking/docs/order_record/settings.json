@@ -11,7 +11,177 @@
       "workflow_state"
     ],
     "default_filters": [],
-    "quick_entry": false
+    "quick_entry": false,
+    "form_layout": {
+      "version": 1,
+      "tabs": [
+        {
+          "id": "overview",
+          "label": "Overview",
+          "sections": [
+            {
+              "id": "identity",
+              "label": "Identity",
+              "columns": [
+                {
+                  "id": "identity_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "title"
+                  ]
+                },
+                {
+                  "id": "identity_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "reference_no"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "parties",
+              "label": "Parties",
+              "columns": [
+                {
+                  "id": "parties_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "party"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "dates",
+              "label": "Dates",
+              "columns": [
+                {
+                  "id": "dates_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "transaction_date"
+                  ]
+                },
+                {
+                  "id": "dates_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "order_date"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "status",
+              "label": "Workflow",
+              "columns": [
+                {
+                  "id": "status_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "workflow_state"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "details",
+          "label": "Details",
+          "sections": [
+            {
+              "id": "content",
+              "label": "Details",
+              "columns": [
+                {
+                  "id": "content_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "order_code",
+                    "external_account_reference",
+                    "fulfillment_state"
+                  ]
+                },
+                {
+                  "id": "content_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "source_reference",
+                    "payment_state"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "content_details",
+              "label": "Description",
+              "columns": [
+                {
+                  "id": "content_details_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "description"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "amounts",
+              "label": "Amounts",
+              "columns": [
+                {
+                  "id": "amounts_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "currency"
+                  ]
+                },
+                {
+                  "id": "amounts_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "total_amount"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "related",
+          "label": "Related",
+          "sections": [
+            {
+              "id": "relations",
+              "label": "Related Records",
+              "columns": [
+                {
+                  "id": "relations_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "order_status"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   },
   "related_docs": [
     {
@@ -36,6 +206,11 @@
     },
     {
       "doc_id": "shipment_record",
+      "relation_type": "related",
+      "show_in_related_panel": true
+    },
+    {
+      "doc_id": "party_record",
       "relation_type": "related",
       "show_in_related_panel": true
     }
@@ -64,9 +239,26 @@
       "doc_id": "shipment_record",
       "lookup_mode": "multiple",
       "purpose": "relation_collection"
+    },
+    {
+      "field_id": "party",
+      "doc_id": "party_record",
+      "lookup_mode": "single",
+      "purpose": "primary_party"
     }
   ],
-  "fetch_rules": [],
+  "fetch_rules": [
+    {
+      "source_field": "party",
+      "doc_id": "party_record",
+      "mode": "context"
+    },
+    {
+      "source_field": "related_order_line",
+      "doc_id": "order_line",
+      "mode": "context"
+    }
+  ],
   "reference_map": {
     "primary_reference_field": "reference_no",
     "reference_labels": []
@@ -74,6 +266,7 @@
   "relation_rules": {
     "parent_doc": null,
     "child_docs": [
+      "party_record",
       "order_line",
       "fulfillment_case",
       "payment_attempt",
@@ -84,16 +277,36 @@
   "borrowed_fields": [
     {
       "description": "source customer/order context from sales or commerce source docs"
+    },
+    {
+      "field_id": "party",
+      "doc_id": "party_record",
+      "description": "Borrow context from party_record through party."
+    },
+    {
+      "field_id": "related_order_line",
+      "doc_id": "order_line",
+      "description": "Borrow context from order_line through related_order_line."
     }
   ],
   "ui_panels": {
     "show_activity_log": true,
     "show_comments": true,
     "show_assignments": true,
-    "show_related_docs": true
+    "show_related_docs": true,
+    "show_kpis": true,
+    "show_summaries": true,
+    "show_charts": true,
+    "show_reports": true
   },
   "integration": {
-    "external_refs": [],
+    "external_refs": [
+      {
+        "field_id": "source_reference",
+        "kind": "source",
+        "label": "Source Reference"
+      }
+    ],
     "sync_rules": []
   },
   "runtime_hints": {
@@ -150,6 +363,20 @@
         "creates status history and fulfillment follow-up records for customer visibility and operations control"
       ]
     },
-    "action_side_effects_file": "side_effects.json"
+    "action_side_effects_file": "side_effects.json",
+    "supports_official_copy": true,
+    "supports_evidence_timeline": true,
+    "supports_chain_of_custody": false
+  },
+  "dashboard": {
+    "metric_blocks": [
+      "kpis",
+      "summaries",
+      "charts",
+      "reports",
+      "records"
+    ],
+    "default_view": "list",
+    "reporting_surface": "doc"
   }
 }

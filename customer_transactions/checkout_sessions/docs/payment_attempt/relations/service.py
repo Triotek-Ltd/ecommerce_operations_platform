@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "payment_attempt"
-RELATED_DOCS = [{'doc_id': 'checkout_session', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'order_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'payment_intent_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'card_authorization_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'mobile_money_transaction', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'checkout_session', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'order_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'payment_intent_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'card_authorization_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'mobile_money_transaction', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'party_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'party', 'doc_id': 'party_record', 'mode': 'context'}, {'source_field': 'related_order_record', 'doc_id': 'order_record', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'checkout/order context from linked records'}, {'description': 'external payment references from payment integration docs'}]
+BORROWED_FIELDS = [{'description': 'checkout/order context from linked records'}, {'description': 'external payment references from payment integration docs'}, {'field_id': 'party', 'doc_id': 'party_record', 'description': 'Borrow context from party_record through party.'}, {'field_id': 'related_order_record', 'doc_id': 'order_record', 'description': 'Borrow context from order_record through related_order_record.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

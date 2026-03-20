@@ -7,9 +7,9 @@ from core.services.relation_resolution import RelationResolutionService
 
 DOC_ID = "commerce_customer_account"
 RELATED_DOCS = [{'doc_id': 'account_activity_log', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'wishlist_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'purchase_history_snapshot', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'customer_account', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+FETCH_RULES = [{'source_field': 'related_customer_account', 'doc_id': 'customer_account', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'base customer identity from sales/CRM customer_account'}]
+BORROWED_FIELDS = [{'description': 'base customer identity from sales/CRM customer_account'}, {'field_id': 'related_customer_account', 'doc_id': 'customer_account', 'description': 'Borrow context from customer_account through related_customer_account.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

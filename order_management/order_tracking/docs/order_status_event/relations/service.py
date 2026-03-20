@@ -7,9 +7,9 @@ from core.services.relation_resolution import RelationResolutionService
 
 DOC_ID = "order_status_event"
 RELATED_DOCS = [{'doc_id': 'order_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'commerce_event_log', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'payment_log_entry', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+FETCH_RULES = [{'source_field': 'related_order_record', 'doc_id': 'order_record', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'order identity from order_record'}]
+BORROWED_FIELDS = [{'description': 'order identity from order_record'}, {'field_id': 'related_order_record', 'doc_id': 'order_record', 'description': 'Borrow context from order_record through related_order_record.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

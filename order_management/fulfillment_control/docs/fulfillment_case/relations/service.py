@@ -7,9 +7,9 @@ from core.services.relation_resolution import RelationResolutionService
 
 DOC_ID = "fulfillment_case"
 RELATED_DOCS = [{'doc_id': 'order_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'order_line', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'shipment_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'delivery_exception_case', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+FETCH_RULES = [{'source_field': 'related_order_record', 'doc_id': 'order_record', 'mode': 'context'}, {'source_field': 'related_order_line', 'doc_id': 'order_line', 'mode': 'context'}, {'source_field': 'related_delivery_exception_case', 'doc_id': 'delivery_exception_case', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'order/line context from linked records'}]
+BORROWED_FIELDS = [{'description': 'order/line context from linked records'}, {'field_id': 'related_order_record', 'doc_id': 'order_record', 'description': 'Borrow context from order_record through related_order_record.'}, {'field_id': 'related_order_line', 'doc_id': 'order_line', 'description': 'Borrow context from order_line through related_order_line.'}, {'field_id': 'related_delivery_exception_case', 'doc_id': 'delivery_exception_case', 'description': 'Borrow context from delivery_exception_case through related_delivery_exception_case.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

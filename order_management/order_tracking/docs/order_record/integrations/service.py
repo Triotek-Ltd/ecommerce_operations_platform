@@ -4,7 +4,7 @@ from __future__ import annotations
 
 
 DOC_ID = "order_record"
-INTEGRATION_RULES = {'external_refs': [], 'sync_rules': []}
+INTEGRATION_RULES = {'external_refs': [{'field_id': 'source_reference', 'kind': 'source', 'label': 'Source Reference'}], 'sync_rules': []}
 
 class IntegrationService:
     def sync_rules(self) -> list:

@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "wishlist_record"
-RELATED_DOCS = [{'doc_id': 'commerce_customer_account', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'catalog_product', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'order_record', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'commerce_customer_account', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'catalog_product', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'order_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'party_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'party', 'doc_id': 'party_record', 'mode': 'context'}, {'source_field': 'customer_account', 'doc_id': 'commerce_customer_account', 'mode': 'context'}, {'source_field': 'related_order_record', 'doc_id': 'order_record', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'account identity from commerce_customer_account'}, {'description': 'product display context from catalog_product'}]
+BORROWED_FIELDS = [{'description': 'account identity from commerce_customer_account'}, {'description': 'product display context from catalog_product'}, {'field_id': 'party', 'doc_id': 'party_record', 'description': 'Borrow context from party_record through party.'}, {'field_id': 'customer_account', 'doc_id': 'commerce_customer_account', 'description': 'Borrow context from commerce_customer_account through customer_account.'}, {'field_id': 'related_order_record', 'doc_id': 'order_record', 'description': 'Borrow context from order_record through related_order_record.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

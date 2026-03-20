@@ -4,5 +4,750 @@
   "app_id": "ecommerce_operations_platform",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Customer Transactions KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "customer_transactions",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Customer Transactions summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "customer_transactions",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Customer Transactions charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "customer_transactions",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "customer_transactions_trend_line",
+            "label": "Customer Transactions trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "customer_transactions_volume_column",
+            "label": "Customer Transactions volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "customer_transactions_distribution_donut",
+            "label": "Customer Transactions distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "checkout_session_trend_line",
+            "label": "Checkout Session trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "checkout_session_volume_column",
+            "label": "Checkout Session volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "checkout_session_distribution_donut",
+            "label": "Checkout Session distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "payment_attempt_trend_line",
+            "label": "Payment Attempt trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "payment_attempt_volume_column",
+            "label": "Payment Attempt volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "payment_attempt_distribution_donut",
+            "label": "Payment Attempt distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "adjustment_record_trend_line",
+            "label": "Adjustment Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "adjustment_record_volume_column",
+            "label": "Adjustment Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "adjustment_record_distribution_donut",
+            "label": "Adjustment Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "refund_case_trend_line",
+            "label": "Refund Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "refund_case_volume_column",
+            "label": "Refund Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "refund_case_distribution_donut",
+            "label": "Refund Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Customer Transactions reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "customer_transactions",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "customer_transactions",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "customer_transactions",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "customer_transactions",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "customer_transactions",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Customer Transactions Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Customer Transactions Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Checkout Session Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Checkout Session Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "customer_transactions_trend_line",
+        "label": "Customer Transactions trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "customer_transactions_volume_column",
+        "label": "Customer Transactions volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "customer_transactions_distribution_donut",
+        "label": "Customer Transactions distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "checkout_session_trend_line",
+        "label": "Checkout Session trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "checkout_session_volume_column",
+        "label": "Checkout Session volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "checkout_session_distribution_donut",
+        "label": "Checkout Session distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "payment_attempt_trend_line",
+        "label": "Payment Attempt trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "payment_attempt_volume_column",
+        "label": "Payment Attempt volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "payment_attempt_distribution_donut",
+        "label": "Payment Attempt distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "adjustment_record_trend_line",
+        "label": "Adjustment Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "adjustment_record_volume_column",
+        "label": "Adjustment Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "adjustment_record_distribution_donut",
+        "label": "Adjustment Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "refund_case_trend_line",
+        "label": "Refund Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "refund_case_volume_column",
+        "label": "Refund Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "refund_case_distribution_donut",
+        "label": "Refund Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "checkout_session",
+        "title": "Checkout Session",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "payment_attempt",
+        "title": "Payment Attempt",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "adjustment_record",
+        "title": "Adjustment Record",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "refund_case",
+        "title": "Refund Case",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "payment_attempt",
+      "order_record",
+      "commerce_customer_account",
+      "checkout_session",
+      "payment_intent_record",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "refund_case",
+      "adjustment_record",
+      "chargeback_case",
+      "marketplace_return_case"
+    ],
+    "upstream_docs": [
+      "payment_attempt",
+      "order_record",
+      "commerce_customer_account",
+      "checkout_session",
+      "payment_intent_record",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "refund_case",
+      "adjustment_record",
+      "chargeback_case",
+      "marketplace_return_case"
+    ],
+    "downstream_docs": [
+      "checkout_session",
+      "chargeback_case"
+    ],
+    "actors": [
+      "account owner",
+      "finance officer",
+      "approver",
+      "case owner"
+    ],
+    "downstream_effects": [],
+    "emits_records": [
+      {
+        "action_id": "confirm",
+        "target_doc": "checkout_session",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "approve",
+        "target_doc": "chargeback_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "chargeback_case",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "payment_attempt",
+      "order_record",
+      "commerce_customer_account",
+      "checkout_session",
+      "payment_intent_record",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "refund_case",
+      "adjustment_record",
+      "chargeback_case",
+      "marketplace_return_case"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "checkout_session",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "checkout_session",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "checkout_session",
+        "target_doc": "commerce_customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "checkout_session",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "payment_intent_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "card_authorization_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "mobile_money_transaction",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "checkout_session",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "adjustment_record",
+        "target_doc": "refund_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "adjustment_record",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "adjustment_record",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "adjustment_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "chargeback_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "marketplace_return_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "chargeback_case",
+        "relation": "create_record",
+        "action_id": "approve"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "chargeback_case",
+        "relation": "create_record",
+        "action_id": "close"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "payment_attempt",
+          "kind": "doc"
+        },
+        {
+          "id": "order_record",
+          "kind": "doc"
+        },
+        {
+          "id": "commerce_customer_account",
+          "kind": "doc"
+        },
+        {
+          "id": "checkout_session",
+          "kind": "doc"
+        },
+        {
+          "id": "payment_intent_record",
+          "kind": "doc"
+        },
+        {
+          "id": "card_authorization_record",
+          "kind": "doc"
+        },
+        {
+          "id": "mobile_money_transaction",
+          "kind": "doc"
+        },
+        {
+          "id": "refund_case",
+          "kind": "doc"
+        },
+        {
+          "id": "adjustment_record",
+          "kind": "doc"
+        },
+        {
+          "id": "chargeback_case",
+          "kind": "doc"
+        },
+        {
+          "id": "marketplace_return_case",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "checkout_session",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "checkout_session",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "checkout_session",
+          "target_doc": "commerce_customer_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "checkout_session",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "payment_intent_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "card_authorization_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "mobile_money_transaction",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "checkout_session",
+          "relation": "create_record",
+          "action_id": "confirm"
+        },
+        {
+          "source_doc": "adjustment_record",
+          "target_doc": "refund_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "adjustment_record",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "adjustment_record",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "adjustment_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "chargeback_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "marketplace_return_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "chargeback_case",
+          "relation": "create_record",
+          "action_id": "approve"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "chargeback_case",
+          "relation": "create_record",
+          "action_id": "close"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

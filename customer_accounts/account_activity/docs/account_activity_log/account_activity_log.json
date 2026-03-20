@@ -15,6 +15,246 @@
   },
   "doc_key": "account_activity_log",
   "doc_title": "Account Activity Log",
+  "ui": {
+    "icon_key": "report",
+    "accent": "#205072",
+    "logo_image": null,
+    "cover_image": null,
+    "preferred_views": [
+      "list",
+      "table",
+      "detail",
+      "report"
+    ],
+    "default_density": "comfortable"
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "doc",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "records",
+      "flatten_submodules_in_ui": false,
+      "views": [
+        "list",
+        "table",
+        "detail",
+        "report"
+      ]
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Account Activity Log KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "account_activity_log",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Account Activity Log summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "account_activity_log",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Account Activity Log charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "account_activity_log",
+          "metric_family": "trend"
+        }
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Account Activity Log reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "account_activity_log",
+          "metric_family": "reporting"
+        }
+      },
+      {
+        "id": "records",
+        "type": "record_table",
+        "title": "Account Activity Log records",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "account_activity_log",
+          "metric_family": "records"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "account_activity_log",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "account_activity_log",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "account_activity_log",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "account_activity_log",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Account Activity Log Overview",
+        "report_type": "dashboard_summary",
+        "surface": "doc"
+      },
+      {
+        "id": "trend_report",
+        "label": "Account Activity Log Trends",
+        "report_type": "trend_analysis",
+        "surface": "doc"
+      },
+      {
+        "id": "summary_report",
+        "label": "Account Activity Log Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Account Activity Log Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "supports_outputs": true,
+    "supports_print_formats": true,
+    "default_views": [
+      "summary",
+      "trend",
+      "report_table"
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "account_activity_log_trend_line",
+        "label": "Account Activity Log trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "account_activity_log_volume_column",
+        "label": "Account Activity Log volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "account_activity_log_distribution_donut",
+        "label": "Account Activity Log distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "commerce_customer_account",
+      "commerce_event_log",
+      "purchase_history_snapshot",
+      "retention_policy"
+    ],
+    "upstream_docs": [
+      "commerce_customer_account",
+      "commerce_event_log",
+      "purchase_history_snapshot"
+    ],
+    "downstream_docs": [],
+    "borrowed_fields": [
+      "account identity from commerce_customer_account"
+    ],
+    "emits_records": [],
+    "downstream_effects": [],
+    "actors": [
+      "procurement officer",
+      "account owner"
+    ],
+    "handoff_targets": [
+      "commerce_customer_account",
+      "commerce_event_log",
+      "purchase_history_snapshot"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "account_activity_log",
+        "target_doc": "commerce_customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "account_activity_log",
+        "target_doc": "commerce_event_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "account_activity_log",
+        "target_doc": "purchase_history_snapshot",
+        "relation": "references"
+      }
+    ]
+  },
   "allowed_actions": [
     "record",
     "review",
@@ -100,7 +340,7 @@
         "label": "Reference No",
         "type": "Data",
         "required": false,
-        "read_only": false,
+        "read_only": true,
         "default": null,
         "unique": false,
         "options": null,
@@ -166,11 +406,12 @@
         "allow_on_submit": false,
         "indexed": true,
         "ui": {
-          "visible": true,
+          "visible": false,
           "list_visible": true,
           "filterable": true,
           "sortable": true
-        }
+        },
+        "hidden": true
       },
       {
         "field_id": "posting_date",
@@ -201,7 +442,7 @@
         "label": "Activity Code",
         "type": "Data",
         "required": false,
-        "read_only": false,
+        "read_only": true,
         "default": null,
         "unique": false,
         "options": null,
@@ -223,7 +464,7 @@
       {
         "field_id": "customer_account",
         "label": "Customer Account",
-        "type": "Data",
+        "type": "Link",
         "required": false,
         "read_only": false,
         "default": null,
@@ -319,14 +560,14 @@
       {
         "field_id": "related_object_reference",
         "label": "Related Object Reference",
-        "type": "Data",
+        "type": "Link",
         "required": false,
         "read_only": false,
         "default": null,
         "unique": false,
         "options": null,
         "purpose": null,
-        "linked_doc": null,
+        "linked_doc": "object_reference",
         "depends_on": null,
         "mandatory_depends_on": null,
         "read_only_depends_on": null,
@@ -338,7 +579,8 @@
           "list_visible": false,
           "filterable": true,
           "sortable": true
-        }
+        },
+        "relation_kind": "explicit"
       },
       {
         "field_id": "related_commerce_event_log",
@@ -362,7 +604,8 @@
           "list_visible": false,
           "filterable": false,
           "sortable": false
-        }
+        },
+        "relation_kind": "explicit"
       },
       {
         "field_id": "related_purchase_history_snapshot",
@@ -386,7 +629,8 @@
           "list_visible": false,
           "filterable": false,
           "sortable": false
-        }
+        },
+        "relation_kind": "explicit"
       }
     ],
     "title_field": "title",
@@ -415,7 +659,12 @@
       "supports_attachments": true,
       "supports_comments": true,
       "supports_activity_log": true,
-      "supports_assignments": true
+      "supports_assignments": true,
+      "is_submittable": false,
+      "supports_submission_snapshot": true,
+      "supports_official_outputs": true,
+      "supports_evidence_pack": true,
+      "supports_signoff": false
     },
     "lifecycle": {
       "initial_state": "active",
@@ -456,15 +705,20 @@
           "record",
           "review",
           "archive"
-        ]
+        ],
+        "scope": "system",
+        "ownership": "platform"
       },
       {
         "role_id": "procurement officer",
         "actions": [
           "view",
           "list",
-          "record"
-        ]
+          "record",
+          "create"
+        ],
+        "scope": "execution",
+        "ownership": "operations"
       },
       {
         "role_id": "account owner",
@@ -472,10 +726,27 @@
           "view",
           "list",
           "review",
-          "archive"
-        ]
+          "archive",
+          "update"
+        ],
+        "scope": "execution",
+        "ownership": "finance"
       }
     ],
+    "submission_snapshot_policy": {
+      "enabled": true,
+      "trigger_action": "submit",
+      "freeze_fields_after_snapshot": true,
+      "retain_snapshot_history": true,
+      "snapshot_label_template": "{reference_no}-{workflow_state}"
+    },
+    "signature_policy": {
+      "enabled": false,
+      "mode": "approval",
+      "required_roles": [],
+      "reason_required": false,
+      "counter_signature_required": false
+    },
     "transaction_behavior": {
       "is_transactional": true,
       "transaction_kind": "ledger_entry",
@@ -487,7 +758,8 @@
       "party_model": {
         "primary_party_field": null,
         "counterparty_field": null,
-        "party_roles": []
+        "party_roles": [],
+        "specific_party_field": null
       },
       "value_model": {
         "currency_field": null,
@@ -495,9 +767,13 @@
         "balance_impact": "none"
       },
       "reference_model": {
-        "reference_no_field": "reference_no",
+        "reference_no_field": "activity_code",
         "upstream_links": [],
-        "downstream_links": []
+        "downstream_links": [],
+        "generated_identifier_fields": [
+          "reference_no",
+          "activity_code"
+        ]
       },
       "line_items": {
         "enabled": false,
@@ -516,7 +792,67 @@
       "audit": {
         "track_state_history": true,
         "track_action_log": true,
-        "track_external_refs": true
+        "track_external_refs": true,
+        "require_reason_for_change": false,
+        "require_action_comment": false,
+        "hash_official_outputs": false
+      },
+      "records_management": {
+        "retention_policy_ref": "administration.office_administration.filing_records_management.retention_disposal.retention_policy",
+        "legal_hold_enabled": false,
+        "disposition_action": "archive",
+        "immutable_after_submit": true,
+        "official_copy_on_submit": false,
+        "chain_of_custody_required": false,
+        "retention_trigger_field": null,
+        "legal_hold_field": null
+      },
+      "evidence_policy": {
+        "required_attachments": [],
+        "required_references": [],
+        "required_approvals": [],
+        "verification_fields": []
+      },
+      "legal_hold_policy": {
+        "enabled": false,
+        "hold_field": null,
+        "restrict_disposition_while_active": true,
+        "allow_override_roles": []
+      },
+      "official_copy_policy": {
+        "enabled": true,
+        "format": "pdf",
+        "generate_on_submit": false,
+        "hash_outputs": false,
+        "include_audit_summary": true,
+        "include_attachments_index": true
+      },
+      "chain_of_custody_policy": {
+        "enabled": false,
+        "custody_event_field": null,
+        "require_transfer_reason": false,
+        "require_actor_identity": true
+      },
+      "settlement": {
+        "enabled": false,
+        "source_fields": [],
+        "target_doc_types": [],
+        "allocation_field": null,
+        "requires_reference_selection": false
+      },
+      "actor_validation": {
+        "enabled": false,
+        "required_events": [],
+        "verification_fields": [],
+        "signature_required_on": [],
+        "counterparty_confirmation_required": false
+      },
+      "external_reference_model": {
+        "enabled": false,
+        "primary_source_reference_field": null,
+        "source_reference_fields": [],
+        "reference_kinds": [],
+        "allow_multiple": false
       }
     }
   },
@@ -531,7 +867,134 @@
         "workflow_state"
       ],
       "default_filters": [],
-      "quick_entry": false
+      "quick_entry": false,
+      "form_layout": {
+        "version": 1,
+        "tabs": [
+          {
+            "id": "overview",
+            "label": "Overview",
+            "sections": [
+              {
+                "id": "identity",
+                "label": "Identity",
+                "columns": [
+                  {
+                    "id": "identity_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "title"
+                    ]
+                  },
+                  {
+                    "id": "identity_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "reference_no"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "parties",
+                "label": "Parties",
+                "columns": [
+                  {
+                    "id": "parties_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "customer_account"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "dates",
+                "label": "Dates",
+                "columns": [
+                  {
+                    "id": "dates_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "posting_date"
+                    ]
+                  },
+                  {
+                    "id": "dates_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "event_time"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "status",
+                "label": "Workflow",
+                "columns": [
+                  {
+                    "id": "status_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "workflow_state"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "details",
+            "label": "Details",
+            "sections": [
+              {
+                "id": "content",
+                "label": "Details",
+                "columns": [
+                  {
+                    "id": "content_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "activity_code",
+                      "source_channel"
+                    ]
+                  },
+                  {
+                    "id": "content_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "activity_type",
+                      "related_object_reference"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "content_details",
+                "label": "Description",
+                "columns": [
+                  {
+                    "id": "content_details_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "description"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     "related_docs": [
       {
@@ -548,6 +1011,11 @@
         "doc_id": "purchase_history_snapshot",
         "relation_type": "related",
         "show_in_related_panel": true
+      },
+      {
+        "doc_id": "object_reference",
+        "relation_type": "related",
+        "show_in_related_panel": true
       }
     ],
     "lookup_rules": [
@@ -562,9 +1030,27 @@
         "doc_id": "purchase_history_snapshot",
         "lookup_mode": "multiple",
         "purpose": "relation_collection"
+      },
+      {
+        "field_id": "customer_account",
+        "doc_id": "commerce_customer_account",
+        "lookup_mode": "single",
+        "purpose": "relation"
+      },
+      {
+        "field_id": "related_object_reference",
+        "doc_id": "object_reference",
+        "lookup_mode": "single",
+        "purpose": "relation"
       }
     ],
-    "fetch_rules": [],
+    "fetch_rules": [
+      {
+        "source_field": "customer_account",
+        "doc_id": "commerce_customer_account",
+        "mode": "context"
+      }
+    ],
     "reference_map": {
       "primary_reference_field": "reference_no",
       "reference_labels": []
@@ -572,6 +1058,8 @@
     "relation_rules": {
       "parent_doc": null,
       "child_docs": [
+        "commerce_customer_account",
+        "object_reference",
         "commerce_event_log",
         "purchase_history_snapshot"
       ],
@@ -580,13 +1068,22 @@
     "borrowed_fields": [
       {
         "description": "account identity from commerce_customer_account"
+      },
+      {
+        "field_id": "customer_account",
+        "doc_id": "commerce_customer_account",
+        "description": "Borrow context from commerce_customer_account through customer_account."
       }
     ],
     "ui_panels": {
       "show_activity_log": true,
       "show_comments": true,
       "show_assignments": true,
-      "show_related_docs": true
+      "show_related_docs": true,
+      "show_kpis": true,
+      "show_summaries": true,
+      "show_charts": true,
+      "show_reports": true
     },
     "integration": {
       "external_refs": [],
@@ -627,7 +1124,21 @@
           ]
         }
       },
-      "action_side_effects_file": "side_effects.json"
+      "action_side_effects_file": "side_effects.json",
+      "supports_official_copy": true,
+      "supports_evidence_timeline": true,
+      "supports_chain_of_custody": false
+    },
+    "dashboard": {
+      "metric_blocks": [
+        "kpis",
+        "summaries",
+        "charts",
+        "reports",
+        "records"
+      ],
+      "default_view": "list",
+      "reporting_surface": "doc"
     }
   },
   "classification": {
@@ -648,7 +1159,8 @@
       "party_model": {
         "primary_party_field": null,
         "counterparty_field": null,
-        "party_roles": []
+        "party_roles": [],
+        "specific_party_field": null
       },
       "value_model": {
         "currency_field": null,
@@ -656,9 +1168,13 @@
         "balance_impact": "none"
       },
       "reference_model": {
-        "reference_no_field": "reference_no",
+        "reference_no_field": "activity_code",
         "upstream_links": [],
-        "downstream_links": []
+        "downstream_links": [],
+        "generated_identifier_fields": [
+          "reference_no",
+          "activity_code"
+        ]
       },
       "line_items": {
         "enabled": false,
@@ -677,12 +1193,97 @@
       "audit": {
         "track_state_history": true,
         "track_action_log": true,
-        "track_external_refs": true
+        "track_external_refs": true,
+        "require_reason_for_change": false,
+        "require_action_comment": false,
+        "hash_official_outputs": false
+      },
+      "records_management": {
+        "retention_policy_ref": "administration.office_administration.filing_records_management.retention_disposal.retention_policy",
+        "legal_hold_enabled": false,
+        "disposition_action": "archive",
+        "immutable_after_submit": true,
+        "official_copy_on_submit": false,
+        "chain_of_custody_required": false,
+        "retention_trigger_field": null,
+        "legal_hold_field": null
+      },
+      "evidence_policy": {
+        "required_attachments": [],
+        "required_references": [],
+        "required_approvals": [],
+        "verification_fields": []
+      },
+      "legal_hold_policy": {
+        "enabled": false,
+        "hold_field": null,
+        "restrict_disposition_while_active": true,
+        "allow_override_roles": []
+      },
+      "official_copy_policy": {
+        "enabled": true,
+        "format": "pdf",
+        "generate_on_submit": false,
+        "hash_outputs": false,
+        "include_audit_summary": true,
+        "include_attachments_index": true
+      },
+      "chain_of_custody_policy": {
+        "enabled": false,
+        "custody_event_field": null,
+        "require_transfer_reason": false,
+        "require_actor_identity": true
+      },
+      "settlement": {
+        "enabled": false,
+        "source_fields": [],
+        "target_doc_types": [],
+        "allocation_field": null,
+        "requires_reference_selection": false
+      },
+      "actor_validation": {
+        "enabled": false,
+        "required_events": [],
+        "verification_fields": [],
+        "signature_required_on": [],
+        "counterparty_confirmation_required": false
+      },
+      "external_reference_model": {
+        "enabled": false,
+        "primary_source_reference_field": null,
+        "source_reference_fields": [],
+        "reference_kinds": [],
+        "allow_multiple": false
       }
     },
+    "submission_snapshot_policy": {
+      "enabled": true,
+      "trigger_action": "submit",
+      "freeze_fields_after_snapshot": true,
+      "retain_snapshot_history": true,
+      "snapshot_label_template": "{reference_no}-{workflow_state}"
+    },
+    "signature_policy": {
+      "enabled": false,
+      "mode": "approval",
+      "required_roles": [],
+      "reason_required": false,
+      "counter_signature_required": false
+    },
+    "records_profile": {
+      "record_class": "business_record",
+      "legal_significance": "standard",
+      "confidentiality": "internal",
+      "official_copy_format": "pdf",
+      "evidence_gaps": []
+    },
     "report_boundary_classification": "source business doc",
-    "validation_status": "ready",
-    "validation_warnings": []
+    "validation_status": "warning",
+    "validation_warnings": [
+      "helper_relation_field:related_object_reference",
+      "helper_relation_field:related_commerce_event_log",
+      "helper_relation_field:related_purchase_history_snapshot"
+    ]
   },
   "business_logic": {
     "seeded": true,
@@ -726,6 +1327,11 @@
     "api_base_path": "/apis/ecommerce_operations_platform/customer_accounts/account_activity/account_activity_log/",
     "status_field": "workflow_state",
     "initial_state": "active",
+    "actions": [
+      "record",
+      "review",
+      "archive"
+    ],
     "required_fields": [
       "title",
       "workflow_state",
@@ -742,9 +1348,104 @@
     "related_docs": [
       "commerce_customer_account",
       "commerce_event_log",
-      "purchase_history_snapshot"
+      "purchase_history_snapshot",
+      "object_reference"
     ],
+    "records_profile": {
+      "record_class": "business_record",
+      "legal_significance": "standard",
+      "confidentiality": "internal",
+      "official_copy_format": "pdf",
+      "evidence_gaps": []
+    },
+    "submission_snapshot_policy": {
+      "enabled": true,
+      "trigger_action": "submit",
+      "freeze_fields_after_snapshot": true,
+      "retain_snapshot_history": true,
+      "snapshot_label_template": "{reference_no}-{workflow_state}"
+    },
+    "signature_policy": {
+      "enabled": false,
+      "mode": "approval",
+      "required_roles": [],
+      "reason_required": false,
+      "counter_signature_required": false
+    },
+    "records_management": {
+      "retention_policy_ref": "administration.office_administration.filing_records_management.retention_disposal.retention_policy",
+      "legal_hold_enabled": false,
+      "disposition_action": "archive",
+      "immutable_after_submit": true,
+      "official_copy_on_submit": false,
+      "chain_of_custody_required": false,
+      "retention_trigger_field": null,
+      "legal_hold_field": null
+    },
+    "legal_hold_policy": {
+      "enabled": false,
+      "hold_field": null,
+      "restrict_disposition_while_active": true,
+      "allow_override_roles": []
+    },
+    "official_copy_policy": {
+      "enabled": true,
+      "format": "pdf",
+      "generate_on_submit": false,
+      "hash_outputs": false,
+      "include_audit_summary": true,
+      "include_attachments_index": true
+    },
+    "evidence_policy": {
+      "required_attachments": [],
+      "required_references": [],
+      "required_approvals": [],
+      "verification_fields": []
+    },
+    "chain_of_custody_policy": {
+      "enabled": false,
+      "custody_event_field": null,
+      "require_transfer_reason": false,
+      "require_actor_identity": true
+    },
     "downstream_effects": [],
+    "role_action_matrix": [
+      {
+        "role_id": "System Manager",
+        "actions": [
+          "view",
+          "list",
+          "record",
+          "review",
+          "archive"
+        ],
+        "scope": "system",
+        "ownership": "platform"
+      },
+      {
+        "role_id": "procurement officer",
+        "actions": [
+          "view",
+          "list",
+          "record",
+          "create"
+        ],
+        "scope": "execution",
+        "ownership": "operations"
+      },
+      {
+        "role_id": "account owner",
+        "actions": [
+          "view",
+          "list",
+          "review",
+          "archive",
+          "update"
+        ],
+        "scope": "execution",
+        "ownership": "finance"
+      }
+    ],
     "action_side_effects_file": "side_effects.json"
   },
   "runtime": {

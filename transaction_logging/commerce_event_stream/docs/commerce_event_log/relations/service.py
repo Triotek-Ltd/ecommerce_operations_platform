@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "commerce_event_log"
-RELATED_DOCS = [{'doc_id': 'order_status_event', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'account_activity_log', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'sales_activity_record', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'order_status_event', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'account_activity_log', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'sales_activity_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'order_customer_product_reference', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'related_order_customer_product_reference', 'doc_id': 'order_customer_product_reference', 'mode': 'context'}, {'source_field': 'related_order_status_event', 'doc_id': 'order_status_event', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'source object context from linked platform or source records'}]
+BORROWED_FIELDS = [{'description': 'source object context from linked platform or source records'}, {'field_id': 'related_order_customer_product_reference', 'doc_id': 'order_customer_product_reference', 'description': 'Borrow context from order_customer_product_reference through related_order_customer_product_reference.'}, {'field_id': 'related_order_status_event', 'doc_id': 'order_status_event', 'description': 'Borrow context from order_status_event through related_order_status_event.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

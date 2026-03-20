@@ -10,7 +10,8 @@
   "doc_archetype": "transaction",
   "classification": {
     "archetype": "transaction",
-    "bundle": "platform"
+    "bundle": "platform",
+    "doc_kind": "transaction"
   },
   "planning_source": {
     "type": "reference_doc_generation_manifest",
@@ -23,5 +24,343 @@
       "source-order sync",
       "split-shipment handling"
     ]
+  },
+  "ui": {
+    "icon_key": "receipt",
+    "accent": "#1f7a8c",
+    "logo_image": null,
+    "cover_image": null,
+    "preferred_views": [
+      "list",
+      "table",
+      "detail",
+      "report"
+    ],
+    "default_density": "comfortable"
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "doc",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "records",
+      "flatten_submodules_in_ui": false,
+      "views": [
+        "list",
+        "table",
+        "detail",
+        "report"
+      ]
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Order Record KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "order_record",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Order Record summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "order_record",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Order Record charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "order_record",
+          "metric_family": "trend"
+        }
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Order Record reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "order_record",
+          "metric_family": "reporting"
+        }
+      },
+      {
+        "id": "records",
+        "type": "record_table",
+        "title": "Order Record records",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "order_record",
+          "metric_family": "records"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "order_record",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "order_record",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "order_record",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "order_record",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Order Record Overview",
+        "report_type": "dashboard_summary",
+        "surface": "doc"
+      },
+      {
+        "id": "trend_report",
+        "label": "Order Record Trends",
+        "report_type": "trend_analysis",
+        "surface": "doc"
+      },
+      {
+        "id": "summary_report",
+        "label": "Order Record Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Order Record Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "supports_outputs": true,
+    "supports_print_formats": true,
+    "default_views": [
+      "summary",
+      "trend",
+      "report_table"
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "order_record_trend_line",
+        "label": "Order Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_record_volume_column",
+        "label": "Order Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_record_distribution_donut",
+        "label": "Order Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "order_line",
+      "order_status_event",
+      "fulfillment_case",
+      "payment_attempt",
+      "shipment_record",
+      "retention_policy"
+    ],
+    "upstream_docs": [
+      "order_line",
+      "order_status_event",
+      "fulfillment_case",
+      "payment_attempt",
+      "shipment_record"
+    ],
+    "downstream_docs": [
+      "order_status_event",
+      "shipment_record",
+      "fulfillment_case"
+    ],
+    "borrowed_fields": [
+      "source customer/order context from sales or commerce source docs"
+    ],
+    "emits_records": [
+      {
+        "action_id": "confirm",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "confirm",
+        "target_doc": "shipment_record",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "cancel",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "fulfillment_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "update_status",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      }
+    ],
+    "downstream_effects": [
+      "creates status history and fulfillment follow-up records for customer visibility and operations control"
+    ],
+    "actors": [
+      "commerce engine",
+      "fulfillment owner",
+      "exception handler"
+    ],
+    "handoff_targets": [
+      "order_line",
+      "order_status_event",
+      "fulfillment_case",
+      "payment_attempt",
+      "shipment_record"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_line",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "fulfillment_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "shipment_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "shipment_record",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "cancel"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "fulfillment_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "update_status"
+      }
+    ]
+  },
+  "contract_version": 1,
+  "records_profile": {
+    "record_class": "business_record",
+    "legal_significance": "standard",
+    "confidentiality": "internal",
+    "official_copy_format": "pdf",
+    "evidence_gaps": []
   }
 }

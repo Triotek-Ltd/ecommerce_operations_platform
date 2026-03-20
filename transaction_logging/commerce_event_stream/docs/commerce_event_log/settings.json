@@ -9,7 +9,127 @@
       "workflow_state"
     ],
     "default_filters": [],
-    "quick_entry": false
+    "quick_entry": false,
+    "form_layout": {
+      "version": 1,
+      "tabs": [
+        {
+          "id": "overview",
+          "label": "Overview",
+          "sections": [
+            {
+              "id": "identity",
+              "label": "Identity",
+              "columns": [
+                {
+                  "id": "identity_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "title"
+                  ]
+                },
+                {
+                  "id": "identity_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "reference_no"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "parties",
+              "label": "Parties",
+              "columns": [
+                {
+                  "id": "parties_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "related_order_customer_product_reference"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "dates",
+              "label": "Dates",
+              "columns": [
+                {
+                  "id": "dates_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "posting_date"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "status",
+              "label": "Workflow",
+              "columns": [
+                {
+                  "id": "status_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "workflow_state"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "details",
+          "label": "Details",
+          "sections": [
+            {
+              "id": "content",
+              "label": "Details",
+              "columns": [
+                {
+                  "id": "content_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "event_code",
+                    "event_type",
+                    "normalized_event_category"
+                  ]
+                },
+                {
+                  "id": "content_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "event_source",
+                    "event_timestamp"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "content_details",
+              "label": "Description",
+              "columns": [
+                {
+                  "id": "content_details_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "description"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   },
   "related_docs": [
     {
@@ -24,6 +144,11 @@
     },
     {
       "doc_id": "sales_activity_record",
+      "relation_type": "related",
+      "show_in_related_panel": true
+    },
+    {
+      "doc_id": "order_customer_product_reference",
       "relation_type": "related",
       "show_in_related_panel": true
     }
@@ -46,9 +171,26 @@
       "doc_id": "sales_activity_record",
       "lookup_mode": "multiple",
       "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_order_customer_product_reference",
+      "doc_id": "order_customer_product_reference",
+      "lookup_mode": "single",
+      "purpose": "relation"
     }
   ],
-  "fetch_rules": [],
+  "fetch_rules": [
+    {
+      "source_field": "related_order_customer_product_reference",
+      "doc_id": "order_customer_product_reference",
+      "mode": "context"
+    },
+    {
+      "source_field": "related_order_status_event",
+      "doc_id": "order_status_event",
+      "mode": "context"
+    }
+  ],
   "reference_map": {
     "primary_reference_field": "reference_no",
     "reference_labels": []
@@ -56,6 +198,7 @@
   "relation_rules": {
     "parent_doc": null,
     "child_docs": [
+      "order_customer_product_reference",
       "order_status_event",
       "account_activity_log",
       "sales_activity_record"
@@ -65,13 +208,27 @@
   "borrowed_fields": [
     {
       "description": "source object context from linked platform or source records"
+    },
+    {
+      "field_id": "related_order_customer_product_reference",
+      "doc_id": "order_customer_product_reference",
+      "description": "Borrow context from order_customer_product_reference through related_order_customer_product_reference."
+    },
+    {
+      "field_id": "related_order_status_event",
+      "doc_id": "order_status_event",
+      "description": "Borrow context from order_status_event through related_order_status_event."
     }
   ],
   "ui_panels": {
     "show_activity_log": true,
     "show_comments": true,
     "show_assignments": true,
-    "show_related_docs": true
+    "show_related_docs": true,
+    "show_kpis": true,
+    "show_summaries": true,
+    "show_charts": true,
+    "show_reports": true
   },
   "integration": {
     "external_refs": [],
@@ -107,6 +264,20 @@
         ]
       }
     },
-    "action_side_effects_file": "side_effects.json"
+    "action_side_effects_file": "side_effects.json",
+    "supports_official_copy": true,
+    "supports_evidence_timeline": true,
+    "supports_chain_of_custody": false
+  },
+  "dashboard": {
+    "metric_blocks": [
+      "kpis",
+      "summaries",
+      "charts",
+      "reports",
+      "records"
+    ],
+    "default_view": "list",
+    "reporting_surface": "doc"
   }
 }

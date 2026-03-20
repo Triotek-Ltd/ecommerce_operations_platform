@@ -8,5 +8,2664 @@
     "id": "CUSTOM-PROPRIETARY",
     "type": "proprietary_custom",
     "terms_ref": "LICENSE"
+  },
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "app",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "modules",
+      "flatten_submodules_in_ui": false
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "My Plug App KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "app",
+          "entity_id": "ecommerce_operations_platform",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "My Plug App summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "app",
+          "entity_id": "ecommerce_operations_platform",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "My Plug App charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "app",
+          "entity_id": "ecommerce_operations_platform",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "ecommerce_operations_platform_trend_line",
+            "label": "My Plug App trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "ecommerce_operations_platform_volume_column",
+            "label": "My Plug App volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "ecommerce_operations_platform_distribution_donut",
+            "label": "My Plug App distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "customer_accounts_trend_line",
+            "label": "Customer Accounts trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "customer_accounts_volume_column",
+            "label": "Customer Accounts volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "customer_accounts_distribution_donut",
+            "label": "Customer Accounts distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "account_activity_log_trend_line",
+            "label": "Account Activity Log trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "account_activity_log_volume_column",
+            "label": "Account Activity Log volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "account_activity_log_distribution_donut",
+            "label": "Account Activity Log distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "purchase_history_snapshot_trend_line",
+            "label": "Purchase History Snapshot trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "purchase_history_snapshot_volume_column",
+            "label": "Purchase History Snapshot volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "purchase_history_snapshot_distribution_donut",
+            "label": "Purchase History Snapshot distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "commerce_customer_account_trend_line",
+            "label": "Commerce Customer Account trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "commerce_customer_account_volume_column",
+            "label": "Commerce Customer Account volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "commerce_customer_account_distribution_donut",
+            "label": "Commerce Customer Account distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "wishlist_record_trend_line",
+            "label": "Wishlist Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "wishlist_record_volume_column",
+            "label": "Wishlist Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "wishlist_record_distribution_donut",
+            "label": "Wishlist Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "customer_transactions_trend_line",
+            "label": "Customer Transactions trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "customer_transactions_volume_column",
+            "label": "Customer Transactions volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "customer_transactions_distribution_donut",
+            "label": "Customer Transactions distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "checkout_session_trend_line",
+            "label": "Checkout Session trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "checkout_session_volume_column",
+            "label": "Checkout Session volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "checkout_session_distribution_donut",
+            "label": "Checkout Session distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "payment_attempt_trend_line",
+            "label": "Payment Attempt trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "payment_attempt_volume_column",
+            "label": "Payment Attempt volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "payment_attempt_distribution_donut",
+            "label": "Payment Attempt distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "adjustment_record_trend_line",
+            "label": "Adjustment Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "adjustment_record_volume_column",
+            "label": "Adjustment Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "adjustment_record_distribution_donut",
+            "label": "Adjustment Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "refund_case_trend_line",
+            "label": "Refund Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "refund_case_volume_column",
+            "label": "Refund Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "refund_case_distribution_donut",
+            "label": "Refund Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "order_management_trend_line",
+            "label": "Order Management trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "order_management_volume_column",
+            "label": "Order Management volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "order_management_distribution_donut",
+            "label": "Order Management distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "fulfillment_case_trend_line",
+            "label": "Fulfillment Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "fulfillment_case_volume_column",
+            "label": "Fulfillment Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "fulfillment_case_distribution_donut",
+            "label": "Fulfillment Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "order_line_trend_line",
+            "label": "Order Line trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "order_line_volume_column",
+            "label": "Order Line volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "order_line_distribution_donut",
+            "label": "Order Line distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "order_record_trend_line",
+            "label": "Order Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "order_record_volume_column",
+            "label": "Order Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "order_record_distribution_donut",
+            "label": "Order Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "order_status_event_trend_line",
+            "label": "Order Status Event trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "order_status_event_volume_column",
+            "label": "Order Status Event volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "order_status_event_distribution_donut",
+            "label": "Order Status Event distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "product_catalog_management_trend_line",
+            "label": "Product Catalog Management trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "product_catalog_management_volume_column",
+            "label": "Product Catalog Management volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "product_catalog_management_distribution_donut",
+            "label": "Product Catalog Management distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "catalog_price_trend_line",
+            "label": "Catalog Price trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "catalog_price_volume_column",
+            "label": "Catalog Price volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "catalog_price_distribution_donut",
+            "label": "Catalog Price distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "catalog_product_trend_line",
+            "label": "Catalog Product trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "catalog_product_volume_column",
+            "label": "Catalog Product volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "catalog_product_distribution_donut",
+            "label": "Catalog Product distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "catalog_change_log_trend_line",
+            "label": "Catalog Change Log trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "catalog_change_log_volume_column",
+            "label": "Catalog Change Log volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "catalog_change_log_distribution_donut",
+            "label": "Catalog Change Log distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "catalog_visibility_rule_trend_line",
+            "label": "Catalog Visibility Rule trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "catalog_visibility_rule_volume_column",
+            "label": "Catalog Visibility Rule volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "catalog_visibility_rule_distribution_donut",
+            "label": "Catalog Visibility Rule distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "transaction_logging_trend_line",
+            "label": "Transaction Logging trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "transaction_logging_volume_column",
+            "label": "Transaction Logging volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "transaction_logging_distribution_donut",
+            "label": "Transaction Logging distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "commerce_event_log_trend_line",
+            "label": "Commerce Event Log trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "commerce_event_log_volume_column",
+            "label": "Commerce Event Log volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "commerce_event_log_distribution_donut",
+            "label": "Commerce Event Log distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "payment_log_entry_trend_line",
+            "label": "Payment Log Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "payment_log_entry_volume_column",
+            "label": "Payment Log Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "payment_log_entry_distribution_donut",
+            "label": "Payment Log Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "sales_activity_record_trend_line",
+            "label": "Sales Activity Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "sales_activity_record_volume_column",
+            "label": "Sales Activity Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "sales_activity_record_distribution_donut",
+            "label": "Sales Activity Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "My Plug App reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "app",
+          "entity_id": "ecommerce_operations_platform",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "app",
+        "entity_id": "ecommerce_operations_platform",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "app",
+        "entity_id": "ecommerce_operations_platform",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "app",
+        "entity_id": "ecommerce_operations_platform",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "app",
+        "entity_id": "ecommerce_operations_platform",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "My Plug App Overview",
+        "report_type": "dashboard_summary",
+        "surface": "app"
+      },
+      {
+        "id": "trend_report",
+        "label": "My Plug App Trends",
+        "report_type": "trend_analysis",
+        "surface": "app"
+      },
+      {
+        "id": "summary_report",
+        "label": "Account Activity Log Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Account Activity Log Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "ecommerce_operations_platform_trend_line",
+        "label": "My Plug App trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "ecommerce_operations_platform_volume_column",
+        "label": "My Plug App volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "ecommerce_operations_platform_distribution_donut",
+        "label": "My Plug App distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "customer_accounts_trend_line",
+        "label": "Customer Accounts trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "customer_accounts_volume_column",
+        "label": "Customer Accounts volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "customer_accounts_distribution_donut",
+        "label": "Customer Accounts distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "account_activity_log_trend_line",
+        "label": "Account Activity Log trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "account_activity_log_volume_column",
+        "label": "Account Activity Log volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "account_activity_log_distribution_donut",
+        "label": "Account Activity Log distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "purchase_history_snapshot_trend_line",
+        "label": "Purchase History Snapshot trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "purchase_history_snapshot_volume_column",
+        "label": "Purchase History Snapshot volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "purchase_history_snapshot_distribution_donut",
+        "label": "Purchase History Snapshot distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "commerce_customer_account_trend_line",
+        "label": "Commerce Customer Account trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "commerce_customer_account_volume_column",
+        "label": "Commerce Customer Account volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "commerce_customer_account_distribution_donut",
+        "label": "Commerce Customer Account distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "wishlist_record_trend_line",
+        "label": "Wishlist Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "wishlist_record_volume_column",
+        "label": "Wishlist Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "wishlist_record_distribution_donut",
+        "label": "Wishlist Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "customer_transactions_trend_line",
+        "label": "Customer Transactions trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "customer_transactions_volume_column",
+        "label": "Customer Transactions volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "customer_transactions_distribution_donut",
+        "label": "Customer Transactions distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "checkout_session_trend_line",
+        "label": "Checkout Session trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "checkout_session_volume_column",
+        "label": "Checkout Session volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "checkout_session_distribution_donut",
+        "label": "Checkout Session distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "payment_attempt_trend_line",
+        "label": "Payment Attempt trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "payment_attempt_volume_column",
+        "label": "Payment Attempt volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "payment_attempt_distribution_donut",
+        "label": "Payment Attempt distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "adjustment_record_trend_line",
+        "label": "Adjustment Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "adjustment_record_volume_column",
+        "label": "Adjustment Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "adjustment_record_distribution_donut",
+        "label": "Adjustment Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "refund_case_trend_line",
+        "label": "Refund Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "refund_case_volume_column",
+        "label": "Refund Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "refund_case_distribution_donut",
+        "label": "Refund Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "order_management_trend_line",
+        "label": "Order Management trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_management_volume_column",
+        "label": "Order Management volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_management_distribution_donut",
+        "label": "Order Management distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "fulfillment_case_trend_line",
+        "label": "Fulfillment Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "fulfillment_case_volume_column",
+        "label": "Fulfillment Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "fulfillment_case_distribution_donut",
+        "label": "Fulfillment Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "order_line_trend_line",
+        "label": "Order Line trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_line_volume_column",
+        "label": "Order Line volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_line_distribution_donut",
+        "label": "Order Line distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "order_record_trend_line",
+        "label": "Order Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_record_volume_column",
+        "label": "Order Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_record_distribution_donut",
+        "label": "Order Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "order_status_event_trend_line",
+        "label": "Order Status Event trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "order_status_event_volume_column",
+        "label": "Order Status Event volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "order_status_event_distribution_donut",
+        "label": "Order Status Event distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "product_catalog_management_trend_line",
+        "label": "Product Catalog Management trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "product_catalog_management_volume_column",
+        "label": "Product Catalog Management volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "product_catalog_management_distribution_donut",
+        "label": "Product Catalog Management distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "catalog_price_trend_line",
+        "label": "Catalog Price trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "catalog_price_volume_column",
+        "label": "Catalog Price volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "catalog_price_distribution_donut",
+        "label": "Catalog Price distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "catalog_product_trend_line",
+        "label": "Catalog Product trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "catalog_product_volume_column",
+        "label": "Catalog Product volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "catalog_product_distribution_donut",
+        "label": "Catalog Product distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "catalog_change_log_trend_line",
+        "label": "Catalog Change Log trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "catalog_change_log_volume_column",
+        "label": "Catalog Change Log volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "catalog_change_log_distribution_donut",
+        "label": "Catalog Change Log distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "catalog_visibility_rule_trend_line",
+        "label": "Catalog Visibility Rule trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "catalog_visibility_rule_volume_column",
+        "label": "Catalog Visibility Rule volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "catalog_visibility_rule_distribution_donut",
+        "label": "Catalog Visibility Rule distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "transaction_logging_trend_line",
+        "label": "Transaction Logging trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "transaction_logging_volume_column",
+        "label": "Transaction Logging volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "transaction_logging_distribution_donut",
+        "label": "Transaction Logging distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "commerce_event_log_trend_line",
+        "label": "Commerce Event Log trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "commerce_event_log_volume_column",
+        "label": "Commerce Event Log volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "commerce_event_log_distribution_donut",
+        "label": "Commerce Event Log distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "payment_log_entry_trend_line",
+        "label": "Payment Log Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "payment_log_entry_volume_column",
+        "label": "Payment Log Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "payment_log_entry_distribution_donut",
+        "label": "Payment Log Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "sales_activity_record_trend_line",
+        "label": "Sales Activity Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "sales_activity_record_volume_column",
+        "label": "Sales Activity Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "sales_activity_record_distribution_donut",
+        "label": "Sales Activity Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "customer_accounts",
+        "title": "Customer Accounts",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "customer_transactions",
+        "title": "Customer Transactions",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "order_management",
+        "title": "Order Management",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "product_catalog_management",
+        "title": "Product Catalog Management",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "transaction_logging",
+        "title": "Transaction Logging",
+        "surface": "module",
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "commerce_customer_account",
+      "commerce_event_log",
+      "purchase_history_snapshot",
+      "order_record",
+      "account_activity_log",
+      "wishlist_record",
+      "customer_account",
+      "catalog_product",
+      "payment_attempt",
+      "checkout_session",
+      "payment_intent_record",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "refund_case",
+      "adjustment_record",
+      "chargeback_case",
+      "marketplace_return_case",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case",
+      "fulfillment_case",
+      "order_status_event",
+      "payment_log_entry",
+      "pricing_decision",
+      "catalog_change_log",
+      "catalog_price",
+      "catalog_visibility_rule",
+      "product_record",
+      "sales_activity_record",
+      "processor_event_log",
+      "analytics_report"
+    ],
+    "upstream_docs": [
+      "commerce_customer_account",
+      "commerce_event_log",
+      "purchase_history_snapshot",
+      "order_record",
+      "account_activity_log",
+      "wishlist_record",
+      "customer_account",
+      "catalog_product",
+      "payment_attempt",
+      "checkout_session",
+      "payment_intent_record",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "refund_case",
+      "adjustment_record",
+      "chargeback_case",
+      "marketplace_return_case",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case",
+      "fulfillment_case",
+      "order_status_event",
+      "payment_log_entry",
+      "pricing_decision",
+      "catalog_change_log",
+      "catalog_price",
+      "catalog_visibility_rule",
+      "product_record",
+      "sales_activity_record",
+      "processor_event_log",
+      "analytics_report"
+    ],
+    "downstream_docs": [
+      "checkout_session",
+      "chargeback_case",
+      "delivery_exception_case",
+      "order_status_event",
+      "shipment_record",
+      "fulfillment_case"
+    ],
+    "actors": [
+      "procurement officer",
+      "account owner",
+      "finance officer",
+      "approver",
+      "case owner",
+      "operations coordinator",
+      "commerce engine",
+      "fulfillment owner",
+      "exception handler"
+    ],
+    "downstream_effects": [
+      "creates status history and fulfillment follow-up records for customer visibility and operations control"
+    ],
+    "emits_records": [
+      {
+        "action_id": "confirm",
+        "target_doc": "checkout_session",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "approve",
+        "target_doc": "chargeback_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "chargeback_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "resolve",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "assign",
+        "target_doc": "delivery_exception_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "confirm",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "confirm",
+        "target_doc": "shipment_record",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "cancel",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "fulfillment_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "update_status",
+        "target_doc": "order_status_event",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "commerce_customer_account",
+      "commerce_event_log",
+      "purchase_history_snapshot",
+      "order_record",
+      "account_activity_log",
+      "wishlist_record",
+      "customer_account",
+      "catalog_product",
+      "payment_attempt",
+      "checkout_session",
+      "payment_intent_record",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "refund_case",
+      "adjustment_record",
+      "chargeback_case",
+      "marketplace_return_case",
+      "order_line",
+      "shipment_record",
+      "delivery_exception_case",
+      "fulfillment_case",
+      "order_status_event",
+      "payment_log_entry",
+      "pricing_decision",
+      "catalog_change_log",
+      "catalog_price",
+      "catalog_visibility_rule",
+      "product_record",
+      "sales_activity_record",
+      "processor_event_log",
+      "analytics_report"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "account_activity_log",
+        "target_doc": "commerce_customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "account_activity_log",
+        "target_doc": "commerce_event_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "account_activity_log",
+        "target_doc": "purchase_history_snapshot",
+        "relation": "references"
+      },
+      {
+        "source_doc": "purchase_history_snapshot",
+        "target_doc": "commerce_customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "purchase_history_snapshot",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "purchase_history_snapshot",
+        "target_doc": "account_activity_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_customer_account",
+        "target_doc": "account_activity_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_customer_account",
+        "target_doc": "wishlist_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_customer_account",
+        "target_doc": "purchase_history_snapshot",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_customer_account",
+        "target_doc": "customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "wishlist_record",
+        "target_doc": "commerce_customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "wishlist_record",
+        "target_doc": "catalog_product",
+        "relation": "references"
+      },
+      {
+        "source_doc": "wishlist_record",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "checkout_session",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "checkout_session",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "checkout_session",
+        "target_doc": "commerce_customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "checkout_session",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "payment_intent_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "card_authorization_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "mobile_money_transaction",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_attempt",
+        "target_doc": "checkout_session",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "adjustment_record",
+        "target_doc": "refund_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "adjustment_record",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "adjustment_record",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "adjustment_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "chargeback_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "marketplace_return_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "chargeback_case",
+        "relation": "create_record",
+        "action_id": "approve"
+      },
+      {
+        "source_doc": "refund_case",
+        "target_doc": "chargeback_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "order_line",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "shipment_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "resolve"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "fulfillment_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "create_record",
+        "action_id": "assign"
+      },
+      {
+        "source_doc": "order_line",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_line",
+        "target_doc": "catalog_product",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_line",
+        "target_doc": "fulfillment_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_line",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "fulfillment_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "shipment_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "shipment_record",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "cancel"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "fulfillment_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "order_record",
+        "target_doc": "order_status_event",
+        "relation": "create_record",
+        "action_id": "update_status"
+      },
+      {
+        "source_doc": "order_status_event",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_status_event",
+        "target_doc": "commerce_event_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "order_status_event",
+        "target_doc": "payment_log_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_price",
+        "target_doc": "catalog_product",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_price",
+        "target_doc": "pricing_decision",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_price",
+        "target_doc": "catalog_change_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_product",
+        "target_doc": "catalog_price",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_product",
+        "target_doc": "catalog_visibility_rule",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_product",
+        "target_doc": "catalog_change_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_product",
+        "target_doc": "product_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_change_log",
+        "target_doc": "catalog_product",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_change_log",
+        "target_doc": "catalog_price",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_change_log",
+        "target_doc": "catalog_visibility_rule",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_visibility_rule",
+        "target_doc": "catalog_product",
+        "relation": "references"
+      },
+      {
+        "source_doc": "catalog_visibility_rule",
+        "target_doc": "catalog_change_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_event_log",
+        "target_doc": "order_status_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_event_log",
+        "target_doc": "account_activity_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_event_log",
+        "target_doc": "sales_activity_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_log_entry",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_log_entry",
+        "target_doc": "processor_event_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_log_entry",
+        "target_doc": "card_authorization_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_log_entry",
+        "target_doc": "mobile_money_transaction",
+        "relation": "references"
+      },
+      {
+        "source_doc": "sales_activity_record",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "sales_activity_record",
+        "target_doc": "commerce_customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "sales_activity_record",
+        "target_doc": "analytics_report",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "customer_accounts",
+          "kind": "module",
+          "title": "Customer Accounts"
+        },
+        {
+          "id": "customer_transactions",
+          "kind": "module",
+          "title": "Customer Transactions"
+        },
+        {
+          "id": "order_management",
+          "kind": "module",
+          "title": "Order Management"
+        },
+        {
+          "id": "product_catalog_management",
+          "kind": "module",
+          "title": "Product Catalog Management"
+        },
+        {
+          "id": "transaction_logging",
+          "kind": "module",
+          "title": "Transaction Logging"
+        },
+        {
+          "id": "commerce_customer_account",
+          "kind": "doc"
+        },
+        {
+          "id": "commerce_event_log",
+          "kind": "doc"
+        },
+        {
+          "id": "purchase_history_snapshot",
+          "kind": "doc"
+        },
+        {
+          "id": "order_record",
+          "kind": "doc"
+        },
+        {
+          "id": "account_activity_log",
+          "kind": "doc"
+        },
+        {
+          "id": "wishlist_record",
+          "kind": "doc"
+        },
+        {
+          "id": "customer_account",
+          "kind": "doc"
+        },
+        {
+          "id": "catalog_product",
+          "kind": "doc"
+        },
+        {
+          "id": "payment_attempt",
+          "kind": "doc"
+        },
+        {
+          "id": "checkout_session",
+          "kind": "doc"
+        },
+        {
+          "id": "payment_intent_record",
+          "kind": "doc"
+        },
+        {
+          "id": "card_authorization_record",
+          "kind": "doc"
+        },
+        {
+          "id": "mobile_money_transaction",
+          "kind": "doc"
+        },
+        {
+          "id": "refund_case",
+          "kind": "doc"
+        },
+        {
+          "id": "adjustment_record",
+          "kind": "doc"
+        },
+        {
+          "id": "chargeback_case",
+          "kind": "doc"
+        },
+        {
+          "id": "marketplace_return_case",
+          "kind": "doc"
+        },
+        {
+          "id": "order_line",
+          "kind": "doc"
+        },
+        {
+          "id": "shipment_record",
+          "kind": "doc"
+        },
+        {
+          "id": "delivery_exception_case",
+          "kind": "doc"
+        },
+        {
+          "id": "fulfillment_case",
+          "kind": "doc"
+        },
+        {
+          "id": "order_status_event",
+          "kind": "doc"
+        },
+        {
+          "id": "payment_log_entry",
+          "kind": "doc"
+        },
+        {
+          "id": "pricing_decision",
+          "kind": "doc"
+        },
+        {
+          "id": "catalog_change_log",
+          "kind": "doc"
+        },
+        {
+          "id": "catalog_price",
+          "kind": "doc"
+        },
+        {
+          "id": "catalog_visibility_rule",
+          "kind": "doc"
+        },
+        {
+          "id": "product_record",
+          "kind": "doc"
+        },
+        {
+          "id": "sales_activity_record",
+          "kind": "doc"
+        },
+        {
+          "id": "processor_event_log",
+          "kind": "doc"
+        },
+        {
+          "id": "analytics_report",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "account_activity_log",
+          "target_doc": "commerce_customer_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "account_activity_log",
+          "target_doc": "commerce_event_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "account_activity_log",
+          "target_doc": "purchase_history_snapshot",
+          "relation": "references"
+        },
+        {
+          "source_doc": "purchase_history_snapshot",
+          "target_doc": "commerce_customer_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "purchase_history_snapshot",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "purchase_history_snapshot",
+          "target_doc": "account_activity_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_customer_account",
+          "target_doc": "account_activity_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_customer_account",
+          "target_doc": "wishlist_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_customer_account",
+          "target_doc": "purchase_history_snapshot",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_customer_account",
+          "target_doc": "customer_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "wishlist_record",
+          "target_doc": "commerce_customer_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "wishlist_record",
+          "target_doc": "catalog_product",
+          "relation": "references"
+        },
+        {
+          "source_doc": "wishlist_record",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "checkout_session",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "checkout_session",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "checkout_session",
+          "target_doc": "commerce_customer_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "checkout_session",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "payment_intent_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "card_authorization_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "mobile_money_transaction",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_attempt",
+          "target_doc": "checkout_session",
+          "relation": "create_record",
+          "action_id": "confirm"
+        },
+        {
+          "source_doc": "adjustment_record",
+          "target_doc": "refund_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "adjustment_record",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "adjustment_record",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "adjustment_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "chargeback_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "marketplace_return_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "chargeback_case",
+          "relation": "create_record",
+          "action_id": "approve"
+        },
+        {
+          "source_doc": "refund_case",
+          "target_doc": "chargeback_case",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "order_line",
+          "relation": "references"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "shipment_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "create_record",
+          "action_id": "resolve"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "fulfillment_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "create_record",
+          "action_id": "assign"
+        },
+        {
+          "source_doc": "order_line",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_line",
+          "target_doc": "catalog_product",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_line",
+          "target_doc": "fulfillment_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_line",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "fulfillment_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "shipment_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "create_record",
+          "action_id": "confirm"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "shipment_record",
+          "relation": "create_record",
+          "action_id": "confirm"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "create_record",
+          "action_id": "cancel"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "fulfillment_case",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "order_record",
+          "target_doc": "order_status_event",
+          "relation": "create_record",
+          "action_id": "update_status"
+        },
+        {
+          "source_doc": "order_status_event",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_status_event",
+          "target_doc": "commerce_event_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "order_status_event",
+          "target_doc": "payment_log_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_price",
+          "target_doc": "catalog_product",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_price",
+          "target_doc": "pricing_decision",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_price",
+          "target_doc": "catalog_change_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_product",
+          "target_doc": "catalog_price",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_product",
+          "target_doc": "catalog_visibility_rule",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_product",
+          "target_doc": "catalog_change_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_product",
+          "target_doc": "product_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_change_log",
+          "target_doc": "catalog_product",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_change_log",
+          "target_doc": "catalog_price",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_change_log",
+          "target_doc": "catalog_visibility_rule",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_visibility_rule",
+          "target_doc": "catalog_product",
+          "relation": "references"
+        },
+        {
+          "source_doc": "catalog_visibility_rule",
+          "target_doc": "catalog_change_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_event_log",
+          "target_doc": "order_status_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_event_log",
+          "target_doc": "account_activity_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_event_log",
+          "target_doc": "sales_activity_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_log_entry",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_log_entry",
+          "target_doc": "processor_event_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_log_entry",
+          "target_doc": "card_authorization_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_log_entry",
+          "target_doc": "mobile_money_transaction",
+          "relation": "references"
+        },
+        {
+          "source_doc": "sales_activity_record",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "sales_activity_record",
+          "target_doc": "commerce_customer_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "sales_activity_record",
+          "target_doc": "analytics_report",
+          "relation": "references"
+        }
+      ]
+    }
   }
 }

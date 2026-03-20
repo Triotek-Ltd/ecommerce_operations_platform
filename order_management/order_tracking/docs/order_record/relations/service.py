@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "order_record"
-RELATED_DOCS = [{'doc_id': 'order_line', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'order_status_event', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'fulfillment_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'payment_attempt', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'shipment_record', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'order_line', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'order_status_event', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'fulfillment_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'payment_attempt', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'shipment_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'party_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'party', 'doc_id': 'party_record', 'mode': 'context'}, {'source_field': 'related_order_line', 'doc_id': 'order_line', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'source customer/order context from sales or commerce source docs'}]
+BORROWED_FIELDS = [{'description': 'source customer/order context from sales or commerce source docs'}, {'field_id': 'party', 'doc_id': 'party_record', 'description': 'Borrow context from party_record through party.'}, {'field_id': 'related_order_line', 'doc_id': 'order_line', 'description': 'Borrow context from order_line through related_order_line.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

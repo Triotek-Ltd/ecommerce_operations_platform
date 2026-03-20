@@ -44,7 +44,7 @@
       "label": "Reference No",
       "type": "Data",
       "required": false,
-      "read_only": false,
+      "read_only": true,
       "default": null,
       "unique": false,
       "options": null,
@@ -112,11 +112,12 @@
       "allow_on_submit": false,
       "indexed": true,
       "ui": {
-        "visible": true,
+        "visible": false,
         "list_visible": true,
         "filterable": true,
         "sortable": true
-      }
+      },
+      "hidden": true
     },
     {
       "field_id": "transaction_date",
@@ -152,7 +153,7 @@
       "unique": false,
       "options": null,
       "purpose": "primary_party",
-      "linked_doc": null,
+      "linked_doc": "party_record",
       "depends_on": null,
       "mandatory_depends_on": null,
       "read_only_depends_on": null,
@@ -169,12 +170,39 @@
     {
       "field_id": "currency",
       "label": "Currency",
-      "type": "Data",
+      "type": "Select",
       "required": false,
       "read_only": false,
       "default": null,
       "unique": false,
-      "options": null,
+      "options": {
+        "values": [
+          "USD",
+          "EUR",
+          "GBP",
+          "KES",
+          "UGX",
+          "TZS",
+          "RWF",
+          "NGN",
+          "GHS",
+          "ZAR",
+          "AED",
+          "SAR",
+          "INR",
+          "CNY",
+          "JPY",
+          "CAD",
+          "AUD",
+          "NZD",
+          "CHF",
+          "SEK",
+          "NOK",
+          "DKK",
+          "ZMW",
+          "BWP"
+        ]
+      },
       "purpose": "currency_code",
       "linked_doc": null,
       "depends_on": null,
@@ -219,7 +247,7 @@
       "label": "Wishlist Code",
       "type": "Data",
       "required": false,
-      "read_only": false,
+      "read_only": true,
       "default": null,
       "unique": false,
       "options": null,
@@ -241,7 +269,7 @@
     {
       "field_id": "customer_account",
       "label": "Customer Account",
-      "type": "Data",
+      "type": "Link",
       "required": false,
       "read_only": false,
       "default": null,
@@ -356,7 +384,8 @@
         "list_visible": false,
         "filterable": false,
         "sortable": false
-      }
+      },
+      "relation_kind": "explicit"
     },
     {
       "field_id": "related_order_record",
@@ -380,7 +409,8 @@
         "list_visible": false,
         "filterable": false,
         "sortable": false
-      }
+      },
+      "relation_kind": "explicit"
     }
   ],
   "field_groups": {
@@ -441,7 +471,12 @@
     "supports_attachments": true,
     "supports_comments": true,
     "supports_activity_log": true,
-    "supports_assignments": true
+    "supports_assignments": true,
+    "is_submittable": false,
+    "supports_submission_snapshot": true,
+    "supports_official_outputs": true,
+    "supports_evidence_pack": true,
+    "supports_signoff": false
   },
   "lifecycle": {
     "initial_state": "active",
@@ -508,7 +543,9 @@
         "convert",
         "remove",
         "archive"
-      ]
+      ],
+      "scope": "system",
+      "ownership": "platform"
     },
     {
       "role_id": "account owner",
@@ -518,7 +555,9 @@
         "create",
         "update",
         "archive"
-      ]
+      ],
+      "scope": "execution",
+      "ownership": "finance"
     }
   ],
   "transaction_behavior": {
@@ -533,8 +572,9 @@
       "primary_party_field": "party",
       "counterparty_field": null,
       "party_roles": [
-        "primary_party"
-      ]
+        "party"
+      ],
+      "specific_party_field": null
     },
     "value_model": {
       "currency_field": "currency",
@@ -544,17 +584,21 @@
       "balance_impact": "none"
     },
     "reference_model": {
-      "reference_no_field": "reference_no",
+      "reference_no_field": "wishlist_code",
       "upstream_links": [],
-      "downstream_links": []
+      "downstream_links": [],
+      "generated_identifier_fields": [
+        "reference_no",
+        "wishlist_code"
+      ]
     },
     "line_items": {
-      "enabled": false,
-      "table_field": null,
+      "enabled": true,
+      "table_field": "item_state",
       "item_key_field": null,
       "quantity_field": null,
       "rate_field": null,
-      "amount_field": null
+      "amount_field": "total_amount"
     },
     "fulfilment": {
       "enabled": false,
@@ -565,7 +609,81 @@
     "audit": {
       "track_state_history": true,
       "track_action_log": true,
-      "track_external_refs": true
+      "track_external_refs": true,
+      "require_reason_for_change": false,
+      "require_action_comment": false,
+      "hash_official_outputs": false
+    },
+    "records_management": {
+      "retention_policy_ref": "administration.office_administration.filing_records_management.retention_disposal.retention_policy",
+      "legal_hold_enabled": false,
+      "disposition_action": "archive",
+      "immutable_after_submit": true,
+      "official_copy_on_submit": false,
+      "chain_of_custody_required": false,
+      "retention_trigger_field": null,
+      "legal_hold_field": null
+    },
+    "evidence_policy": {
+      "required_attachments": [],
+      "required_references": [],
+      "required_approvals": [],
+      "verification_fields": []
+    },
+    "legal_hold_policy": {
+      "enabled": false,
+      "hold_field": null,
+      "restrict_disposition_while_active": true,
+      "allow_override_roles": []
+    },
+    "official_copy_policy": {
+      "enabled": true,
+      "format": "pdf",
+      "generate_on_submit": false,
+      "hash_outputs": false,
+      "include_audit_summary": true,
+      "include_attachments_index": true
+    },
+    "chain_of_custody_policy": {
+      "enabled": false,
+      "custody_event_field": null,
+      "require_transfer_reason": false,
+      "require_actor_identity": true
+    },
+    "settlement": {
+      "enabled": false,
+      "source_fields": [],
+      "target_doc_types": [],
+      "allocation_field": null,
+      "requires_reference_selection": false
+    },
+    "actor_validation": {
+      "enabled": false,
+      "required_events": [],
+      "verification_fields": [],
+      "signature_required_on": [],
+      "counterparty_confirmation_required": false
+    },
+    "external_reference_model": {
+      "enabled": false,
+      "primary_source_reference_field": null,
+      "source_reference_fields": [],
+      "reference_kinds": [],
+      "allow_multiple": false
     }
+  },
+  "submission_snapshot_policy": {
+    "enabled": true,
+    "trigger_action": "submit",
+    "freeze_fields_after_snapshot": true,
+    "retain_snapshot_history": true,
+    "snapshot_label_template": "{reference_no}-{workflow_state}"
+  },
+  "signature_policy": {
+    "enabled": false,
+    "mode": "approval",
+    "required_roles": [],
+    "reason_required": false,
+    "counter_signature_required": false
   }
 }

@@ -4,5 +4,577 @@
   "app_id": "ecommerce_operations_platform",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Transaction Logging KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "transaction_logging",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Transaction Logging summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "transaction_logging",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Transaction Logging charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "transaction_logging",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "transaction_logging_trend_line",
+            "label": "Transaction Logging trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "transaction_logging_volume_column",
+            "label": "Transaction Logging volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "transaction_logging_distribution_donut",
+            "label": "Transaction Logging distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "commerce_event_log_trend_line",
+            "label": "Commerce Event Log trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "commerce_event_log_volume_column",
+            "label": "Commerce Event Log volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "commerce_event_log_distribution_donut",
+            "label": "Commerce Event Log distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "payment_log_entry_trend_line",
+            "label": "Payment Log Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "payment_log_entry_volume_column",
+            "label": "Payment Log Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "payment_log_entry_distribution_donut",
+            "label": "Payment Log Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "sales_activity_record_trend_line",
+            "label": "Sales Activity Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "sales_activity_record_volume_column",
+            "label": "Sales Activity Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "sales_activity_record_distribution_donut",
+            "label": "Sales Activity Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Transaction Logging reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "transaction_logging",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "transaction_logging",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "transaction_logging",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "transaction_logging",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "transaction_logging",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Transaction Logging Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Transaction Logging Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Commerce Event Log Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Commerce Event Log Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "transaction_logging_trend_line",
+        "label": "Transaction Logging trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "transaction_logging_volume_column",
+        "label": "Transaction Logging volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "transaction_logging_distribution_donut",
+        "label": "Transaction Logging distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "commerce_event_log_trend_line",
+        "label": "Commerce Event Log trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "commerce_event_log_volume_column",
+        "label": "Commerce Event Log volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "commerce_event_log_distribution_donut",
+        "label": "Commerce Event Log distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "payment_log_entry_trend_line",
+        "label": "Payment Log Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "payment_log_entry_volume_column",
+        "label": "Payment Log Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "payment_log_entry_distribution_donut",
+        "label": "Payment Log Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "sales_activity_record_trend_line",
+        "label": "Sales Activity Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "sales_activity_record_volume_column",
+        "label": "Sales Activity Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "sales_activity_record_distribution_donut",
+        "label": "Sales Activity Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "commerce_event_log",
+        "title": "Commerce Event Log",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "payment_log_entry",
+        "title": "Payment Log Entry",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "sales_activity_record",
+        "title": "Sales Activity Record",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "order_status_event",
+      "account_activity_log",
+      "sales_activity_record",
+      "payment_attempt",
+      "processor_event_log",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "order_record",
+      "commerce_customer_account",
+      "analytics_report"
+    ],
+    "upstream_docs": [
+      "order_status_event",
+      "account_activity_log",
+      "sales_activity_record",
+      "payment_attempt",
+      "processor_event_log",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "order_record",
+      "commerce_customer_account",
+      "analytics_report"
+    ],
+    "downstream_docs": [],
+    "actors": [
+      "account owner",
+      "approver",
+      "finance officer"
+    ],
+    "downstream_effects": [],
+    "emits_records": [],
+    "handoff_targets": [
+      "order_status_event",
+      "account_activity_log",
+      "sales_activity_record",
+      "payment_attempt",
+      "processor_event_log",
+      "card_authorization_record",
+      "mobile_money_transaction",
+      "order_record",
+      "commerce_customer_account",
+      "analytics_report"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "commerce_event_log",
+        "target_doc": "order_status_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_event_log",
+        "target_doc": "account_activity_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "commerce_event_log",
+        "target_doc": "sales_activity_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_log_entry",
+        "target_doc": "payment_attempt",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_log_entry",
+        "target_doc": "processor_event_log",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_log_entry",
+        "target_doc": "card_authorization_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "payment_log_entry",
+        "target_doc": "mobile_money_transaction",
+        "relation": "references"
+      },
+      {
+        "source_doc": "sales_activity_record",
+        "target_doc": "order_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "sales_activity_record",
+        "target_doc": "commerce_customer_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "sales_activity_record",
+        "target_doc": "analytics_report",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "order_status_event",
+          "kind": "doc"
+        },
+        {
+          "id": "account_activity_log",
+          "kind": "doc"
+        },
+        {
+          "id": "sales_activity_record",
+          "kind": "doc"
+        },
+        {
+          "id": "payment_attempt",
+          "kind": "doc"
+        },
+        {
+          "id": "processor_event_log",
+          "kind": "doc"
+        },
+        {
+          "id": "card_authorization_record",
+          "kind": "doc"
+        },
+        {
+          "id": "mobile_money_transaction",
+          "kind": "doc"
+        },
+        {
+          "id": "order_record",
+          "kind": "doc"
+        },
+        {
+          "id": "commerce_customer_account",
+          "kind": "doc"
+        },
+        {
+          "id": "analytics_report",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "commerce_event_log",
+          "target_doc": "order_status_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_event_log",
+          "target_doc": "account_activity_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "commerce_event_log",
+          "target_doc": "sales_activity_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_log_entry",
+          "target_doc": "payment_attempt",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_log_entry",
+          "target_doc": "processor_event_log",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_log_entry",
+          "target_doc": "card_authorization_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "payment_log_entry",
+          "target_doc": "mobile_money_transaction",
+          "relation": "references"
+        },
+        {
+          "source_doc": "sales_activity_record",
+          "target_doc": "order_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "sales_activity_record",
+          "target_doc": "commerce_customer_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "sales_activity_record",
+          "target_doc": "analytics_report",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }
